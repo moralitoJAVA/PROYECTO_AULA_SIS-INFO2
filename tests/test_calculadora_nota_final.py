@@ -40,3 +40,28 @@ def test_configurar_pesos_cambia_el_resultado():
     nueva = calculadora()
     nueva.configurarPesos(Porcentaje({"asistencia": 100}))
     assert nueva.calcular() == Decimal("90.00")
+ class HistorialConDescuento(HistorialFalso):
+    def __init__(self, notas, descuento):
+        super().__init__(notas)
+        self.descuento = Decimal(descuento)
+ 
+    def obtenerNotas(self):
+        return [{**n, "descuento": self.descuento} for n in super().obtenerNotas()]
+ 
+ 
+def test_un_componente_sin_notas_queda_pendiente_y_no_cuenta_como_cero():
+    solo_asistencia = CalculadoraNotaFinal(PESOS, HistorialFalso([]), RegistroFalso(Decimal("100")))
+    assert solo_asistencia.calcular() == Decimal("10.00")
+ 
+ 
+def test_si_todos_los_componentes_estan_pendientes_no_hay_nota():
+    vacia = CalculadoraNotaFinal(PESOS, HistorialFalso([]), RegistroFalso(None))
+    assert vacia.calcular() is None
+ 
+ 
+def test_la_penalizacion_baja_la_nota_de_tareas():
+    # tareas: 100 con 10% de descuento = 90 -> aporta 27 de 30
+    con_descuento = CalculadoraNotaFinal(
+        PESOS, HistorialConDescuento(["100"], "10"), RegistroFalso(None))
+    assert con_descuento.calcular() == Decimal("27.00")
+
