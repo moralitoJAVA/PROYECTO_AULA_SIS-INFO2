@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tareas</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h1>Mis tareas</h1>
+  <nav><a href="/">Inicio</a></nav>
+
+  <label for="filtro">Ver tareas</label>
+  <select id="filtro">
+    <option value="">Todas (historial)</option>
+    <option>Pendiente</option>
+    <option>Entregada</option>
+    <option>Calificada</option>
+  </select>
+  <div id="advertencia" class="mensaje aviso" hidden></div>
+  <table>
+    <thead><tr><th>N.º</th><th>Título</th><th>Tipo</th><th>Fecha límite</th><th>Estado</th><th>Nota</th><th>Descuento</th><th>Nota final</th><th></th></tr></thead>
+    <tbody id="lista"></tbody>
+  </table>
+
+  <section id="detalle" hidden>
+    <h2 id="detalle-titulo"></h2>
+    <p id="detalle-texto"></p>
+    <p>Puntaje máximo: <strong id="detalle-maximo"></strong></p>
+    <p>Recurso adjunto: <span id="detalle-adjunto"></span></p>
+    <div id="detalle-entrega" class="mensaje" hidden></div>
+    <div id="detalle-penalizacion" class="mensaje error" hidden></div>
+    <div id="detalle-calificacion" class="mensaje" hidden></div>
+    <label for="archivos">Archivos o enlaces (separados por coma)</label>
+    <input id="archivos">
+    <div id="bloque-equipo" hidden>
+      <label for="integrantes">Integrantes del equipo (separados por coma; el primero eres tú)</label>
+      <input id="integrantes">
+      <label for="incumplen">Integrantes que incumplieron (separados por coma, opcional)</label>
+      <input id="incumplen">
+    </div>
+    <button id="entregar">Entregar</button>
+    <h3>Calificación recibida</h3>
+    <label for="nota">Nota</label><input id="nota" type="number" step="0.01">
+    <label for="escala">Escala de evaluación</label><input id="escala" value="0-100">
+    <label for="comentarios">Comentarios</label><textarea id="comentarios" rows="2"></textarea>
+    <button id="calificar">Guardar calificación</button>
+    <h3>Mis apuntes de esta tarea</h3>
+    <textarea id="apunte" rows="2"></textarea><br>
+    <button id="guardar-apunte">Guardar apunte</button>
+    <ul id="apuntes"></ul>
+  </section>
+  <div id="mensaje" class="mensaje" hidden></div>
+
+  <script src="/js/comun.js"></script>
+  <script src="/js/panel_tareas.js"></script>
+</body>
+</html>
