@@ -64,4 +64,33 @@ def test_la_penalizacion_baja_la_nota_de_tareas():
     con_descuento = CalculadoraNotaFinal(
         PESOS, HistorialConDescuento(["100"], "10"), RegistroFalso(None))
     assert con_descuento.calcular() == Decimal("27.00")
+ def test_el_desglose_muestra_pendientes_y_la_penalizacion_por_separado():
+    calc = CalculadoraNotaFinal(PESOS, HistorialConDescuento(["100"], "10"), RegistroFalso(Decimal("100")))
+    desglose = calc.obtenerDesglose()
+    assert desglose["parcial"] is True
+    assert desglose["componentes"]["examenes"]["pendiente"] is True
+    assert desglose["componentes"]["tareas"]["nota"] == Decimal("90.00")
+    assert desglose["componentes"]["tareas"]["penalizacion"] == Decimal("10.00")
+    assert desglose["componentes"]["asistencia"]["penalizacion"] == Decimal("0.00")
+    assert desglose["nota_final"] == Decimal("37.00")
+ 
+ 
+def test_con_todos_los_componentes_el_desglose_no_es_parcial():
+    assert calculadora().obtenerDesglose()["parcial"] is False
+ 
+ 
+def test_recalcular_toma_la_nota_nueva_cuando_cambia_una_nota():
+    registro = RegistroFalso(Decimal("100"))
+    calc = CalculadoraNotaFinal(PESOS, HistorialFalso(["100"]), registro, {"examenes": Decimal("100"), "proyecto": Decimal("100")})
+    assert calc.recalcular() == Decimal("100.00")
+    registro.porcentaje = Decimal("50")
+    assert calc.recalcular() == Decimal("95.00")
+ 
+ 
+def test_recalcular_toma_la_asistencia_nueva():
+    registro = RegistroFalso(Decimal("100"))
+    calc = CalculadoraNotaFinal(PESOS, HistorialFalso([]), registro)
+    registro.porcentaje = Decimal("80")
+    assert calc.recalcular() == Decimal("8.00")
+
 
