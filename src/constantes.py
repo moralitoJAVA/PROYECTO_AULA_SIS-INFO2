@@ -23,3 +23,5 @@ CIEN = Decimal("100")
 CENTESIMOS = Decimal("0.01")
 MINIMO_ASISTENCIA = Decimal("80")
 ESTADOS_QUE_ASISTEN = frozenset({ESTADOS.PRESENTE, ESTADOS.ATRASO})
+TABLA_ASISTENCIAS = "asistencias"
+MSG_TABLA_INVALIDA = "El nombre de la tabla no es válido"
