@@ -34,4 +34,4 @@ class TareaGrupal(Tarea):
         tarea = super().desdeDiccionario(datos)
         if datos["tamano_equipo"] is not None:
             tarea.definirTamano(datos["tamano_equipo"])
-        return tarea
+        return tarea 
