@@ -46,7 +46,8 @@ class CalculadoraNotaFinal:
         if not aportes:
             return None
         return self._redondear(sum(aportes))
-     def recalcular(self):
+
+    def recalcular(self):
         self.ultima_nota = self.calcular()
         return self.ultima_nota
  
