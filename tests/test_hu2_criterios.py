@@ -173,7 +173,7 @@ def test_persistencia_en_las_tablas_de_hu2(entorno, tmp_path):
     cliente, _ = entorno
     cliente.post("/api/tareas/2/entrega-equipo", json={
         "integrantes": ["Ana", "Luis", "Eva"], "estudiante": "Ana", "incumplen": ["Eva"], "archivos": ["e.zip"]})
-    cliente.post("/api/apuntes", json={"vinculo": "tarea-2", "texto": "x"})
+    cliente.post("/api/apuntes", json={"vinculo": "tarea-2", "texto": "x"}) 
     ruta = str(tmp_path / "hu2.db")
     conexion = sqlite3.connect(ruta)
     for tabla in ("entregas", "equipos", "penalizaciones", "apuntes"):

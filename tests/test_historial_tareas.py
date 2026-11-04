@@ -46,7 +46,7 @@ def test_las_notas_se_llevan_a_base_100_con_su_descuento():
     entregas = {3: entrega(ESTADOS_TAREA.CALIFICADA, Decimal("45"), Decimal("50"), Decimal("10"))}
     assert HistorialTareas(TAREAS, entregas).obtenerNotas() == [
         {"numero": 3, "nota_sobre_100": Decimal("90.00"), "descuento": Decimal("10")}
-    ]
+    ] 
 
 
 def test_solo_las_calificadas_aportan_notas():

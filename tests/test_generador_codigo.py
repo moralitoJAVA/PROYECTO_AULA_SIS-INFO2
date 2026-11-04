@@ -15,4 +15,4 @@ def test_el_numero_aumenta_en_cada_tarea():
 
 
 def test_continua_desde_el_ultimo_numero_guardado():
-    assert GeneradorCodigo(ultimo_numero=4).siguienteNumero() == 5
+    assert GeneradorCodigo(ultimo_numero=4).siguienteNumero() == 5 
