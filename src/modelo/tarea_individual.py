@@ -7,4 +7,4 @@ class TareaIndividual(Tarea):
         super().__init__(numero, titulo, instrucciones, fecha_limite, TIPOS_TAREA.INDIVIDUAL, **otros)
 
     def asignarATodos(self, estudiantes):
-        return list(estudiantes)
+        return list(estudiantes) 
