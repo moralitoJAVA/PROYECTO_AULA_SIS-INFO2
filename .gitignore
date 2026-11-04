@@ -1,0 +1,3 @@
+# Artefactos locales generados por Python y SQLite.
+back/__pycache__/
+back/datos.db

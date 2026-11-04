@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Proyecto de prácticas XP para Ingeniería Informática UMSS" />
+    <title>Proyecto Aula | XP</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="encabezado">
+      <div class="contenedor">
+        <p class="marca">Ingeniería Informática · UMSS</p>
+        <h1>Proyecto Aula: prácticas XP</h1>
+        <p>Espacio de trabajo para Historias de Usuario, CRC, TDD y Pair Programming.</p>
+      </div>
+    </header>
+    <main class="contenedor">
+      <section class="panel" aria-labelledby="titulo-historias">
+        <div class="cabecera-seccion">
+          <div><p class="etiqueta">Producto</p><h2 id="titulo-historias">Historias de Usuario</h2></div>
+          <button id="boton-limpiar" class="boton-secundario" type="button">Comprobar conexión</button>
+        </div>
+        <p id="mensaje-vacio" class="mensaje">Aún no hay Historias de Usuario registradas. El equipo puede agregarlas desde <code>js/app.js</code>.</p>
+        <nav id="menu-historias" class="menu-historias" aria-label="Menú de Historias de Usuario"></nav>
+      </section>
+      <section id="contenido-hu" class="panel" aria-live="polite">
+        <h2>Selecciona una Historia de Usuario</h2>
+        <p>Al implementar una HU, su módulo mostrará aquí la funcionalidad correspondiente.</p>
+      </section>
+      <section class="practicas" aria-label="Prácticas de Extreme Programming">
+        <article class="tarjeta"><h2>Tarjetas CRC</h2><p>Documentar clases, responsabilidades y colaboradores de cada HU.</p></article>
+        <article class="tarjeta"><h2>TDD</h2><p>Definir pruebas antes de implementar y registrar sus resultados.</p></article>
+        <article class="tarjeta"><h2>Pair Programming</h2><p>Registrar conductor, navegador y los acuerdos de cada sesión.</p></article>
+      </section>
+    </main>
+    <footer class="pie-pagina"><div class="contenedor">Proyecto académico · Desarrollo local con HTML, CSS y JavaScript puro</div></footer>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
