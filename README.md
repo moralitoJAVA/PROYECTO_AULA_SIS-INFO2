@@ -1,6 +1,6 @@
 # Aula de Clases SI2
 
-Repositorio base para el trabajo universitario de Ingeniería Informática (UMSS). Contiene únicamente la arquitectura inicial: no incluye funcionalidades, lógica de negocio, rutas, interfaz implementada ni pruebas.
+Repositorio del trabajo universitario de Ingeniería Informática (UMSS), con módulos de asistencia, tareas, apuntes y nota final.
 
 ## Arquitectura
 
@@ -27,4 +27,27 @@ docs/              Diagramas, decisiones y documentación técnica
 - `repositorio` concentra el acceso a la fuente de datos y no contiene reglas de negocio.
 - Cada módulo nuevo debe tener sus pruebas correspondientes en `tests/`.
 
-Consultar [la documentación de arquitectura](docs/arquitectura.md) antes de agregar código.
+Consultar [la documentación de arquitectura](docs/arquitectura.md) y el [diagrama de clases](docs/diagrama-clases.md) antes de agregar código.
+
+## Cómo levantar el proyecto
+
+Se necesita Python 3. Desde la raíz del repositorio:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+flask --app 'src.api.app:crear_app()' run --debug
+```
+
+Abrir `http://127.0.0.1:5000` en el navegador. La aplicación crea y usa el archivo local `aula_virtual.db`.
+
+Para ejecutar las pruebas:
+
+```bash
+pytest -q
+```
+
+### Estado actual de integración
+
+La HU-01 de asistencia pasó sus 49 pruebas antes de integrarse. Actualmente la suite completa no inicia porque código ya integrado de HU-02/HU-04 contiene errores de indentación en `src/modelo/calculadora_nota_final.py`, `tests/test_calculadora_nota_final.py` y `tests/test_porcentaje.py`. Corregir esos archivos es necesario antes de levantar la aplicación completa o ejecutar toda la suite.
