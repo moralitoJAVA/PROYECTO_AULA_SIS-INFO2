@@ -1,0 +1,19 @@
+async function llamarApi(url, opciones = {}) {
+  const respuesta = await fetch(url, { headers: { "Content-Type": "application/json" }, ...opciones });
+  const datos = await respuesta.json();
+  if (!respuesta.ok) throw new Error(datos.error);
+  return datos;
+}
+
+function mostrarMensaje(id, texto, tipo = "") {
+  const caja = document.getElementById(id);
+  caja.textContent = texto;
+  caja.className = tipo ? "mensaje " + tipo : "mensaje";
+  caja.hidden = !texto;
+}
+
+function escapar(texto) {
+  const nodo = document.createElement("span");
+  nodo.textContent = texto;
+  return nodo.innerHTML;
+}

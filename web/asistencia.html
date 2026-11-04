@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asistencia</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h1>Asistencia</h1>
+  <nav><a href="/">Inicio</a></nav>
+  <label for="materia">Materia</label>
+  <input id="materia" value="Sistemas de Información 2">
+  <label for="fecha">Fecha de clase</label>
+  <input id="fecha" type="date">
+  <label for="estado">Mi estado</label>
+  <select id="estado"><option>Presente</option><option>Atraso</option><option>Ausente</option><option>Licencia</option></select>
+  <br>
+  <button id="marcar">Guardar asistencia</button>
+  <div id="mensaje" class="mensaje" hidden></div>
+  <div id="alerta" class="mensaje aviso" hidden></div>
+  <p>Porcentaje acumulado: <strong id="porcentaje">pendiente</strong></p>
+  <h2>Mi historial</h2>
+  <table><thead><tr><th>Fecha</th><th>Estado</th></tr></thead><tbody id="historial"></tbody></table>
+  <script src="/js/comun.js"></script>
+  <script src="/js/panel_asistencia.js"></script>
+</body>
+</html>

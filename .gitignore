@@ -1,0 +1,10 @@
+# Archivos locales que no forman parte de la arquitectura.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.sqlite3
+*.db
+.env
+.DS_Store
