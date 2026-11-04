@@ -20,18 +20,28 @@ class TareaGrupal(Tarea):
         self.penalizacion = penalizacion
 
     def registrar(self, ahora):
+        # Validación del tamaño
         if self.tamano_equipo is None:
             raise ValueError(MSG_SIN_TAMANO)
+            
+        # NUEVO: Validación de la penalización (Criterio 3 de la HU exige que sea obligatorio)
+        if self.penalizacion is None:
+            raise ValueError("Debe definir un porcentaje de penalización para tareas grupales") # Puedes crear una constante para este mensaje en constantes.py
+            
         super().registrar(ahora)
 
     def aDiccionario(self):
         datos = super().aDiccionario()
         datos["tamano_equipo"] = self.tamano_equipo
+        # NUEVO: Guardar la penalización en el diccionario
+        datos["penalizacion"] = self.penalizacion 
         return datos
 
-    @classmethod
-    def desdeDiccionario(cls, datos):
-        tarea = super().desdeDiccionario(datos)
-        if datos["tamano_equipo"] is not None:
-            tarea.definirTamano(datos["tamano_equipo"])
+ feature/hu3-tareas-edwinCS
+        # NUEVO: Recuperar la penalización desde el diccionario
+        if datos.get("penalizacion") is not None:
+            tarea.definirPenalizacion(datos["penalizacion"])
+        return tarea
+
         return tarea 
+ main
