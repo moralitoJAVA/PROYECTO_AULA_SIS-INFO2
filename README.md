@@ -1,47 +1,30 @@
-# Proyecto Aula SIS-INFO2
+# Aula de Clases SI2
 
-Base de trabajo para Ingeniería Informática de la UMSS, orientada a prácticas de Extreme Programming (XP): Historias de Usuario (HU), tarjetas CRC, TDD y Pair Programming.
+Repositorio base para el trabajo universitario de Ingeniería Informática (UMSS). Contiene únicamente la arquitectura inicial: no incluye funcionalidades, lógica de negocio, rutas, interfaz implementada ni pruebas.
 
-## Tecnologías
+## Arquitectura
 
-- HTML5
-- CSS3
-- JavaScript puro con módulos ES
-- Python 3 estándar como servidor y API
-- SQLite como base de datos SQL local
-
-No usa frameworks, librerías externas, npm ni bundlers.
-
-## Estructura
+El proyecto se organiza en capas para separar responsabilidades:
 
 ```text
-front/
-├── index.html              Página principal y menú de HU
-├── css/styles.css          Estilos globales responsive
-└── js/
-    ├── app.js              Punto de entrada de la interfaz
-    ├── core/api.js          Cliente para la API Python
-    └── hus/README.md       Espacio para módulos por HU
-back/
-├── servidor.py             Servidor HTTP y API con Python estándar
-├── esquema.sql             Esquema inicial de SQLite
-└── datos.db                Base SQLite (se genera al iniciar)
+src/
+├── api/           Punto de entrada, rutas y adaptadores HTTP
+├── modelo/        Entidades y reglas del dominio
+├── repositorio/   Persistencia y contratos de acceso a datos
+└── servicio/      Casos de uso y coordinación de reglas de negocio
+web/
+├── css/           Estilos de la interfaz
+└── js/            Comportamiento de la interfaz
+tests/             Pruebas automatizadas, con estructura paralela a src/
+docs/              Diagramas, decisiones y documentación técnica
 ```
 
-## Ejecución
+## Reglas de organización
 
-Se requiere Python 3. Desde la raíz del proyecto ejecutar:
+- La capa `web` no accede directamente a `modelo` ni a `repositorio`; se comunica mediante `api`.
+- `api` delega los casos de uso en `servicio`.
+- `servicio` aplica reglas de negocio usando `modelo` y contratos de `repositorio`.
+- `repositorio` concentra el acceso a la fuente de datos y no contiene reglas de negocio.
+- Cada módulo nuevo debe tener sus pruebas correspondientes en `tests/`.
 
-```bash
-python3 back/servidor.py
-```
-
-Después abrir `http://localhost:8000` en el navegador. El servidor crea automáticamente `back/datos.db` a partir de `back/esquema.sql` en el primer inicio.
-
-## Convención para las HU
-
-Cada HU debe tener un módulo dentro de `front/js/hus/`, por ejemplo `hu-01.js`. Desde `front/js/app.js` se registra en el menú y se conecta a su vista. Las operaciones que persistan datos deben consumir rutas de la API bajo `/api/`. Mantener criterios de aceptación, tarjetas CRC y evidencia de pruebas junto al código o en la documentación de cada HU.
-
-## Equipo
-
-Completar nombres, roles y responsabilidades del equipo antes de la entrega.
+Consultar [la documentación de arquitectura](docs/arquitectura.md) antes de agregar código.
