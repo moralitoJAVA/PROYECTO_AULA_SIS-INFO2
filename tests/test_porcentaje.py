@@ -31,3 +31,37 @@ def test_guardar_escribe_los_pesos_en_el_repositorio():
     repositorio = RepositorioMemoria()
     Porcentaje(PESOS).guardar(repositorio)
     assert repositorio.obtener("pesos") == {"asistencia": "10", "tareas": "30", "examenes": "40", "proyecto": "20"}
+ from src.constantes import MSG_PESO_NEGATIVO, MSG_PESOS_NO_SUMAN_100
+ 
+ 
+def test_10_30_40_20_se_acepta():
+    Porcentaje(PESOS).validarSuma()
+ 
+ 
+def test_33_3_mas_33_3_mas_33_4_se_acepta_sin_error_de_float():
+    Porcentaje({"asistencia": "33.3", "tareas": "33.3", "examenes": "33.4"}).validarSuma()
+ 
+ 
+@pytest.mark.parametrize("pesos", [
+    {"asistencia": 10, "tareas": 30, "examenes": 30, "proyecto": 20},
+    {"asistencia": 10, "tareas": 30, "examenes": 50, "proyecto": 20},
+])
+def test_suma_90_o_110_falla_con_el_mensaje_exacto(pesos):
+    with pytest.raises(ValueError) as error:
+        Porcentaje(pesos).validarSuma()
+    assert str(error.value) == "Los pesos deben sumar 100%"
+ 
+ 
+def test_un_peso_negativo_falla_aunque_la_suma_sea_100():
+    with pytest.raises(ValueError) as error:
+        Porcentaje({"asistencia": -10, "tareas": 60, "examenes": 50}).validarSuma()
+    assert str(error.value) == MSG_PESO_NEGATIVO
+ 
+ 
+def test_guardar_rechaza_pesos_invalidos_y_no_escribe():
+    repositorio = RepositorioMemoria()
+    with pytest.raises(ValueError) as error:
+        Porcentaje({"asistencia": 50}).guardar(repositorio)
+    assert str(error.value) == MSG_PESOS_NO_SUMAN_100
+    assert repositorio.listar() == {}
+
