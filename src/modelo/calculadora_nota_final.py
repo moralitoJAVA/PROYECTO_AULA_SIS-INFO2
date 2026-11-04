@@ -46,3 +46,25 @@ class CalculadoraNotaFinal:
         if not aportes:
             return None
         return self._redondear(sum(aportes))
+     def recalcular(self):
+        self.ultima_nota = self.calcular()
+        return self.ultima_nota
+ 
+    def obtenerDesglose(self):
+        notas = self._notas()
+        componentes = {}
+        for componente in COMPONENTES:
+            nota = notas[componente]
+            componentes[componente] = {
+                "peso": self._porcentaje.obtenerPeso(componente),
+                "pendiente": nota is None,
+                "nota": None if nota is None else nota[0],
+                "aporte": None if nota is None else self._redondear(self._aporte(componente, nota)),
+                "penalizacion": None if nota is None else self._redondear(nota[1] - nota[0]),
+            }
+        return {
+            "componentes": componentes,
+            "nota_final": self.calcular(),
+            "parcial": any(dato["pendiente"] for dato in componentes.values()),
+        }
+
