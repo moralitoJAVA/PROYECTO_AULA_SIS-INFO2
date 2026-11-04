@@ -7,6 +7,7 @@ from src.constantes import (
     MSG_COMPONENTE_DESCONOCIDO,
     MSG_PESO_NEGATIVO,
     MSG_PESOS_NO_SUMAN_100,
+    PESOS_POR_DEFECTO,
     TOTAL_PESOS,
 )
  
@@ -33,3 +34,11 @@ class Porcentaje:
     def guardar(self, repositorio):
         self.validarSuma()
         repositorio.guardar(CLAVE_PORCENTAJES, {c: str(p) for c, p in self._pesos.items()})
+ 
+    @classmethod
+    def cargar(cls, repositorio):
+        guardado = repositorio.obtener(CLAVE_PORCENTAJES)
+        return cls(guardado if guardado is not None else PESOS_POR_DEFECTO)
+ 
+    def aDiccionario(self):
+        return {componente: str(peso) for componente, peso in self._pesos.items()}
