@@ -139,8 +139,10 @@ class ServicioTareas:
         )
         fecha_limite = datetime.fromisoformat(datos["fecha_limite"])
         if datos["tipo"] == TIPOS_TAREA.GRUPAL.value:
+            # NUEVO: Se incluye la penalización al crear la TareaGrupal
             return TareaGrupal(numero, datos["titulo"], datos["instrucciones"], fecha_limite,
-                               tamano_equipo=datos.get("tamano_equipo"), **comunes)
+                               tamano_equipo=datos.get("tamano_equipo"), 
+                               penalizacion=datos.get("penalizacion"), **comunes)
         return TareaIndividual(numero, datos["titulo"], datos["instrucciones"], fecha_limite, **comunes)
 
     def registrarTarea(self, tarea, ahora):
