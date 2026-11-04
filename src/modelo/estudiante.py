@@ -9,3 +9,6 @@ class Estudiante:
 
     def obtenerDatos(self):
         return {"nombre": self.nombre}
+
+    def obtenerHistorial(self, registro_asistencia):
+        return registro_asistencia.obtenerHistorial()

@@ -1,4 +1,5 @@
 from calendar import FRIDAY, TUESDAY, WEDNESDAY
+from decimal import Decimal
 from enum import Enum
 
 DIAS_DE_CLASE = frozenset({TUESDAY, WEDNESDAY, FRIDAY})
@@ -18,3 +19,7 @@ MSG_NO_REGISTRADA = "No existe asistencia registrada para esa clase"
 MSG_NO_ES_DIA_DE_CLASE = "La fecha no es un día de clase"
 FORMATO_RESUMEN = "{presentes} presentes, {atrasos} atrasos, {ausentes} ausentes"
 FORMATO_LICENCIAS = ", {licencias} licencias"
+CIEN = Decimal("100")
+CENTESIMOS = Decimal("0.01")
+MINIMO_ASISTENCIA = Decimal("80")
+ESTADOS_QUE_ASISTEN = frozenset({ESTADOS.PRESENTE, ESTADOS.ATRASO})

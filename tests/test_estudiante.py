@@ -13,3 +13,11 @@ def test_nombre_vacio_lanza_error_con_mensaje_exacto(nombre):
     with pytest.raises(ValueError) as error:
         Estudiante(nombre)
     assert str(error.value) == MSG_NOMBRE_VACIO
+
+
+def test_obtener_historial_delega_en_el_registro_de_asistencia():
+    class RegistroFalso:
+        def obtenerHistorial(self):
+            return ["clase 1"]
+
+    assert Estudiante("Julio").obtenerHistorial(RegistroFalso()) == ["clase 1"]
