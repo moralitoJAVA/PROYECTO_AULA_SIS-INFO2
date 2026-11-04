@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nota final</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h1>Nota final</h1>
+  <nav><a href="/">Inicio</a></nav>
+ 
+  <h2>Pesos de cada componente (%)</h2>
+  <label for="peso-asistencia">Asistencia</label><input id="peso-asistencia" type="number" step="0.1">
+  <label for="peso-tareas">Tareas</label><input id="peso-tareas" type="number" step="0.1">
+  <label for="peso-examenes">Exámenes</label><input id="peso-examenes" type="number" step="0.1">
+  <label for="peso-proyecto">Proyecto en equipo</label><input id="peso-proyecto" type="number" step="0.1">
+  <br>
+  <button id="guardar">Guardar pesos</button>
+  <div id="mensaje" class="mensaje" hidden></div>
+ 
+  <h2>Mi desglose</h2>
+  <p>Nota final: <strong id="nota-final">pendiente</strong> <span id="parcial"></span></p>
+  <table>
+    <thead><tr><th>Componente</th><th>Peso</th><th>Nota</th><th>Aporte</th><th>Penalización</th></tr></thead>
+    <tbody id="desglose"></tbody>
+  </table>
+ 
+  <script src="/js/comun.js"></script>
+  <script src="/js/vista_nota_final.js"></script>
+</body>
+</html>

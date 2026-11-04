@@ -32,4 +32,4 @@ class Rubrica:
         rubrica = cls()
         for nombre, puntaje in datos.items():
             rubrica.agregarCriterio(nombre, puntaje)
-        return rubrica
+        return rubrica 

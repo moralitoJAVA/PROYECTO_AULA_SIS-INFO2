@@ -88,3 +88,16 @@ MSG_ES_INDIVIDUAL = "Esta tarea es individual: no se entrega por equipo"
 MSG_TAMANO_DEL_EQUIPO = "El equipo debe tener exactamente {tamano} integrantes"
 MSG_APUNTE_VACIO = "El apunte no puede estar vacío"
 MSG_APUNTE_NO_EXISTE = "El apunte no existe"
+ASISTENCIA = "asistencia"
+TAREAS = "tareas"
+EXAMENES = "examenes"
+PROYECTO = "proyecto"
+COMPONENTES = (ASISTENCIA, TAREAS, EXAMENES, PROYECTO)
+TABLA_PORCENTAJES = "porcentajes"
+CLAVE_PORCENTAJES = "pesos"
+MSG_COMPONENTE_DESCONOCIDO = "El componente no existe"
+TOTAL_PESOS = Decimal("100")
+MSG_PESOS_NO_SUMAN_100 = "Los pesos deben sumar 100%"
+MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
+PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
+

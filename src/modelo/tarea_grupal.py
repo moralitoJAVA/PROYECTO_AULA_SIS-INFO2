@@ -37,12 +37,11 @@ class TareaGrupal(Tarea):
         datos["penalizacion"] = self.penalizacion 
         return datos
 
-    @classmethod
-    def desdeDiccionario(cls, datos):
-        tarea = super().desdeDiccionario(datos)
-        if datos.get("tamano_equipo") is not None:
-            tarea.definirTamano(datos["tamano_equipo"])
+ feature/hu3-tareas-edwinCS
         # NUEVO: Recuperar la penalización desde el diccionario
         if datos.get("penalizacion") is not None:
             tarea.definirPenalizacion(datos["penalizacion"])
         return tarea
+
+        return tarea 
+ main
