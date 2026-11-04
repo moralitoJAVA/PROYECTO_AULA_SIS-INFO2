@@ -12,3 +12,6 @@ class Estudiante:
 
     def obtenerHistorial(self, registro_asistencia):
         return registro_asistencia.obtenerHistorial()
+
+    def obtenerDesglose(self, calculadora):
+        return calculadora.obtenerDesglose()

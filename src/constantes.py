@@ -25,3 +25,5 @@ MINIMO_ASISTENCIA = Decimal("80")
 ESTADOS_QUE_ASISTEN = frozenset({ESTADOS.PRESENTE, ESTADOS.ATRASO})
 TABLA_ASISTENCIAS = "asistencias"
 MSG_TABLA_INVALIDA = "El nombre de la tabla no es válido"
+RUTA_BD = "aula_virtual.db"
+MATERIA_POR_DEFECTO = "Sistemas de Información 2"

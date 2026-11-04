@@ -21,3 +21,11 @@ def test_obtener_historial_delega_en_el_registro_de_asistencia():
             return ["clase 1"]
 
     assert Estudiante("Julio").obtenerHistorial(RegistroFalso()) == ["clase 1"]
+
+
+def test_obtener_desglose_delega_en_la_calculadora():
+    class CalculadoraFalsa:
+        def obtenerDesglose(self):
+            return {"asistencia": "100.00"}
+
+    assert Estudiante("Julio").obtenerDesglose(CalculadoraFalsa()) == {"asistencia": "100.00"}
