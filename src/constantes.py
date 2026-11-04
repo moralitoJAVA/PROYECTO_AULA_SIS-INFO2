@@ -96,3 +96,8 @@ COMPONENTES = (ASISTENCIA, TAREAS, EXAMENES, PROYECTO)
 TABLA_PORCENTAJES = "porcentajes"
 CLAVE_PORCENTAJES = "pesos"
 MSG_COMPONENTE_DESCONOCIDO = "El componente no existe"
+TOTAL_PESOS = Decimal("100")
+MSG_PESOS_NO_SUMAN_100 = "Los pesos deben sumar 100%"
+MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
+PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
+
