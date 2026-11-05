@@ -4,15 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aula virtual</title>
-  <link rel="stylesheet" href="/css/estilos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/inicio.css">
 </head>
 <body>
-  <h1>Aula virtual</h1>
-  <nav>
-    <a href="/asistencia.html">Asistencia</a>
-    <a href="/tareas.html">Tareas</a>
-    <a href="/registro_tarea.html">Registrar tarea</a>
-    <a href="/nota_final.html">Nota final</a>
-  </nav>
+  <div class="pagina">
+    <header class="cabecera">
+      <h1>Aula virtual</h1>
+      <p>Sistemas de Información 2</p>
+    </header>
+
+    <main>
+      <section id="proxima" class="proxima cargando" aria-live="polite">
+        <div>Buscando tu próxima entrega...</div>
+      </section>
+
+      <ul class="secciones">
+        <li>
+          <a class="seccion tareas" href="/tareas.html">
+            <span class="seccion-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span>
+            <span><h2>Tareas</h2><p>Entrega tus trabajos, mira qué vence primero y consulta tus calificaciones.</p></span>
+          </a>
+        </li>
+        <li>
+          <a class="seccion asistencia" href="/asistencia.html">
+            <span class="seccion-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span>
+            <span><h2>Asistencia</h2><p>Marca tu asistencia a clase y revisa tu porcentaje acumulado.</p></span>
+          </a>
+        </li>
+        <li>
+          <a class="seccion registro" href="/registro_tarea.html">
+            <span class="seccion-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+            <span><h2>Registrar tarea</h2><p>Crea una tarea con su fecha límite, su guía y su rúbrica de evaluación.</p></span>
+          </a>
+        </li>
+        <li>
+          <a class="seccion nota" href="/nota_final.html">
+            <span class="seccion-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></svg></span>
+            <span><h2>Nota final</h2><p>Mira cómo se calcula tu nota con el peso de cada componente.</p></span>
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
+
+  <script src="/js/comun.js"></script>
+  <script src="/js/inicio.js"></script>
 </body>
 </html>
