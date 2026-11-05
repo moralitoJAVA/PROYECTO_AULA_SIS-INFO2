@@ -1,0 +1,141 @@
+/* Pantalla de inicio. Autocontenida: no depende de estilos.css. */
+:root {
+  --fondo: #edf0f7;
+  --superficie: #ffffff;
+  --tinta: #0e1a2f;
+  --tinta-suave: #55627c;
+  --linea: #d5dce9;
+  --marca: #3a3fd8;
+  --marca-oscura: #2a2eb0;
+  --marca-suave: #e8e9fc;
+  --urgente: #c9252f;
+  --urgente-suave: #fde9eb;
+  --ok: #0f7a58;
+  --ok-suave: #dcf3ea;
+  --aviso: #8a5300;
+  --aviso-suave: #fff0d2;
+  --fuente-titulo: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --fuente-texto: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+a:focus-visible { outline: 3px solid var(--marca); outline-offset: 3px; }
+
+.pagina { max-width: 980px; margin: 0 auto; padding: 0 16px 64px; }
+
+.cabecera { padding: 48px 0 28px; }
+.cabecera h1 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2.6rem, 8vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.cabecera p { margin: 12px 0 0; color: var(--tinta-suave); font-size: 1.1rem; }
+
+/* ---------- Próxima entrega ---------- */
+.proxima {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 28px;
+  margin-bottom: 32px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  background: var(--tinta);
+  color: #fff;
+}
+.proxima.urgente { background: var(--urgente); }
+.proxima-reloj { display: flex; align-items: baseline; gap: 6px; min-width: 120px; }
+.proxima-cifra {
+  font-family: var(--fuente-titulo);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.proxima-unidad { font-size: 1.2rem; font-weight: 700; }
+.proxima-texto { min-width: 0; }
+.proxima-texto h2 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.proxima-texto p { margin: 4px 0 0; color: rgba(255, 255, 255, 0.78); }
+.proxima-boton {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--tinta);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.proxima-boton:hover { background: var(--marca-suave); }
+.proxima.libre { grid-template-columns: 1fr auto; background: var(--ok); }
+.proxima.cargando { background: #dfe4ef; color: var(--tinta-suave); grid-template-columns: 1fr; }
+
+/* ---------- Secciones ---------- */
+.secciones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.seccion {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  background: var(--superficie);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.seccion:hover { border-color: var(--marca); transform: translateY(-2px); }
+.seccion-icono {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--marca-suave);
+  color: var(--marca-oscura);
+}
+.seccion-icono svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.seccion.tareas .seccion-icono { background: var(--marca); color: #fff; }
+.seccion.asistencia .seccion-icono { background: var(--ok-suave); color: var(--ok); }
+.seccion.registro .seccion-icono { background: var(--aviso-suave); color: var(--aviso); }
+.seccion.nota .seccion-icono { background: var(--urgente-suave); color: var(--urgente); }
+.seccion h2 { margin: 2px 0 4px; font-family: var(--fuente-titulo); font-size: 1.35rem; font-weight: 700; letter-spacing: -0.015em; }
+.seccion p { margin: 0; color: var(--tinta-suave); }
+
+@media (max-width: 720px) {
+  .cabecera { padding-top: 28px; }
+  .proxima { grid-template-columns: 1fr; padding: 20px; }
+  .proxima.libre { grid-template-columns: 1fr; }
+  .proxima-cifra { font-size: 3.2rem; }
+  .proxima-boton { justify-self: start; margin-top: 8px; }
+  .secciones { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seccion { transition: none; }
+  .seccion:hover { transform: none; }
+}
