@@ -5,11 +5,16 @@ async function llamarApi(url, opciones = {}) {
   return datos;
 }
 
+const DURACION_MENSAJE = 6000;
+let temporizadorMensaje = null;
+
 function mostrarMensaje(id, texto, tipo = "") {
   const caja = document.getElementById(id);
   caja.textContent = texto;
   caja.className = tipo ? "mensaje " + tipo : "mensaje";
   caja.hidden = !texto;
+  clearTimeout(temporizadorMensaje);
+  if (texto) temporizadorMensaje = setTimeout(() => { caja.hidden = true; }, DURACION_MENSAJE);
 }
 
 function escapar(texto) {
