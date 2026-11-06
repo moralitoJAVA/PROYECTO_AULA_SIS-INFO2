@@ -1,7 +1,24 @@
+import { guardar, obtener } from "/front/js/core/almacenamiento.js";
+
 const MENSAJE_ALERTA = "Tu asistencia está por debajo del mínimo configurado (80%).";
+const CLAVE_FORMULARIO = "sis-info2:asistencia:formulario";
 
 function elegirClase() {
   return { materia: document.getElementById("materia").value, fecha: document.getElementById("fecha").value };
+}
+
+function guardarFormulario() {
+  guardar(CLAVE_FORMULARIO, { ...elegirClase(), estado: document.getElementById("estado").value });
+}
+
+function restaurarFormulario() {
+  const formulario = obtener(CLAVE_FORMULARIO);
+  if (!formulario) return false;
+
+  for (const campo of ["materia", "fecha", "estado"]) {
+    if (typeof formulario[campo] === "string") document.getElementById(campo).value = formulario[campo];
+  }
+  return true;
 }
 
 async function mostrarMisClases() {
@@ -35,5 +52,12 @@ function mostrarAlerta(hayAlerta) {
   caja.hidden = !hayAlerta;
 }
 
+const seRestauroFormulario = restaurarFormulario();
+for (const id of ["materia", "fecha", "estado"]) {
+  document.getElementById(id).addEventListener("change", guardarFormulario);
+}
+document.getElementById("materia").addEventListener("input", guardarFormulario);
 document.getElementById("marcar").addEventListener("click", marcarEstado);
-mostrarMisClases();
+mostrarMisClases().then(() => {
+  if (seRestauroFormulario) mostrarMensaje("mensaje", "Se restauraron tus preferencias de asistencia.");
+}).catch((error) => mostrarMensaje("mensaje", error.message, "error"));

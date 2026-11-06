@@ -10,6 +10,7 @@ from src.api.contexto import Contexto
 from src.constantes import RUTA_BD
 
 CARPETA_WEB = Path(__file__).resolve().parents[2] / "web"
+CARPETA_FRONT = Path(__file__).resolve().parents[2] / "front"
 PREFIJO_MODULOS_API = "api_"
 CODIGO_ERROR_DE_DATOS = 400
 
@@ -25,6 +26,10 @@ def crear_app(ruta_bd=RUTA_BD, ahora=datetime.now):
     @app.get("/")
     def inicio():
         return send_from_directory(CARPETA_WEB, "index.html")
+
+    @app.get("/front/<path:archivo>")
+    def archivos_front(archivo):
+        return send_from_directory(CARPETA_FRONT, archivo)
 
     for modulo in pkgutil.iter_modules(src.api.__path__):
         if modulo.name.startswith(PREFIJO_MODULOS_API):
