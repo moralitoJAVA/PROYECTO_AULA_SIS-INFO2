@@ -25,6 +25,11 @@ def registrar(app, contexto):
         por_vencer = servicio.tareasPorVencer(contexto.ahora())
         return jsonify({"tareas": filas, "por_vencer": por_vencer})
 
+    @api.post("/api/tareas")
+    def crear_tarea():
+        tarea = servicio.crearTarea(request.get_json())
+        return jsonify(servicio.registrarTarea(tarea, contexto.ahora())), CODIGO_CREADO
+
     @api.get("/api/tareas/<int:numero>")
     def detalle(numero):
         return jsonify(servicio.obtenerDetalle(numero))

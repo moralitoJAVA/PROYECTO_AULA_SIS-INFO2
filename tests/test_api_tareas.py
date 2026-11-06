@@ -30,6 +30,20 @@ def test_el_panel_lista_pendientes_y_marca_las_que_vencen_pronto(cliente):
     assert datos["por_vencer"] == [1]
 
 
+def test_crear_tarea_la_registra_y_la_incluye_en_el_panel(cliente):
+    respuesta = cliente.post("/api/tareas", json={
+        "titulo": "Tarea nueva",
+        "instrucciones": "Resolver el ejercicio",
+        "fecha_limite": "2026-03-06T06:45",
+        "tipo": "Individual",
+        "ruta_adjunto": "/guias/nueva.pdf",
+        "criterios": [{"nombre": "Solución", "puntaje": 100}],
+    })
+    assert respuesta.status_code == 201
+    assert respuesta.get_json()["estado"] == "Registrada"
+    assert [t["numero"] for t in cliente.get("/api/tareas").get_json()["tareas"]] == [1, 2]
+
+
 def test_entregar_y_calificar(cliente):
     respuesta = cliente.post("/api/tareas/1/entrega", json={"archivos": ["t1.zip"]})
     assert respuesta.status_code == 200
