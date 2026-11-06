@@ -1,5 +1,4 @@
-"""Criterio 1: definir los pesos (asistencia 10%, tareas 30%, exámenes 40%, proyecto 20%);
-el sistema solo los acepta si suman exactamente 100%."""
+
 import tempfile
 import unittest
 from decimal import Decimal
