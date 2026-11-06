@@ -28,31 +28,35 @@ async function mostrarMisClases() {
   mostrarHistorial(panel.historial);
   mostrarAlerta(panel.alerta);
   document.getElementById("porcentaje").textContent = panel.porcentaje === null ? "pendiente" : panel.porcentaje + "%";
+  document.getElementById("metrica").className = "metrica" + (panel.porcentaje === null ? "" : panel.alerta ? " urgente" : " ok");
 }
 
 async function marcarEstado() {
   try {
     const { materia, fecha } = elegirClase();
     const estado = document.getElementById("estado").value;
-    const respuesta = await llamarApi("/api/asistencia", { method: "POST", body: JSON.stringify({ materia, fecha, estado }) });
-    mostrarMensaje("mensaje", "Asistencia guardada. " + respuesta.resumen);
+    await llamarApi("/api/asistencia", { method: "POST", body: JSON.stringify({ materia, fecha, estado }) });
     await mostrarMisClases();
+    mostrarMensaje("mensaje", "Asistencia guardada");
   } catch (error) {
     mostrarMensaje("mensaje", error.message, "error");
   }
 }
 
-function mostrarResumen(resumen) { mostrarMensaje("mensaje", "Resumen: " + resumen); }
+function mostrarResumen(resumen) { document.getElementById("resumen").textContent = resumen; }
+const CLASE_ESTADO = { Presente: "ok", Atraso: "aviso", Ausente: "urgente", Licencia: "info" };
 function mostrarHistorial(historial) {
-  document.getElementById("historial").innerHTML = historial.map(([fecha, estado]) => `<tr><td>${escapar(fecha)}</td><td>${escapar(estado)}</td></tr>`).join("");
+  document.getElementById("historial").innerHTML = historial.map(([fecha, estado]) =>
+    `<tr><td>${escapar(fecha)}</td><td><span class="etiqueta ${CLASE_ESTADO[estado] || ""}">${escapar(estado)}</span></td></tr>`).join("");
+  document.getElementById("historial-vacio").hidden = historial.length > 0;
 }
 function mostrarAlerta(hayAlerta) {
-  const caja = document.getElementById("alerta");
-  caja.textContent = hayAlerta ? MENSAJE_ALERTA : "";
-  caja.hidden = !hayAlerta;
+  document.getElementById("alerta-texto").textContent = hayAlerta ? MENSAJE_ALERTA : "";
+  document.getElementById("alerta").hidden = !hayAlerta;
 }
 
 const seRestauroFormulario = restaurarFormulario();
+if (!document.getElementById("fecha").value) document.getElementById("fecha").valueAsDate = new Date();
 for (const id of ["materia", "fecha", "estado"]) {
   document.getElementById(id).addEventListener("change", guardarFormulario);
 }
