@@ -30,3 +30,67 @@
   <script src="/js/vista_nota_final.js"></script>
 </body>
 </html>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;Nota final&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link
+href=&quot;https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;fa
+mily=Instrument+Sans:wght@400;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/base.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;pagina&quot;&gt;
+&lt;header class=&quot;cabecera&quot;&gt;
+&lt;div&gt;
+&lt;h1&gt;Nota final&lt;/h1&gt;
+&lt;p class=&quot;materia&quot;&gt;Sistemas de Información 2&lt;/p&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navegacion&quot; aria-label=&quot;Secciones&quot;&gt;
+&lt;a href=&quot;/&quot;&gt;Inicio&lt;/a&gt;
+&lt;a href=&quot;/asistencia.html&quot;&gt;Asistencia&lt;/a&gt;
+&lt;a href=&quot;/tareas.html&quot;&gt;Tareas&lt;/a&gt;
+&lt;a href=&quot;/registro_tarea.html&quot;&gt;Registrar tarea&lt;/a&gt;
+&lt;a href=&quot;/nota_final.html&quot; aria-current=&quot;page&quot;&gt;Nota final&lt;/a&gt;
+&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+&lt;section class=&quot;tarjeta&quot; aria-labelledby=&quot;titulo-nota&quot;&gt;
+&lt;h2 id=&quot;titulo-nota&quot;&gt;Mi desglose&lt;/h2&gt;
+&lt;div class=&quot;metrica ok&quot;&gt;
+&lt;span class=&quot;metrica-cifra&quot; id=&quot;nota-final&quot;&gt;pendiente&lt;/span&gt;
+&lt;span class=&quot;metrica-nota&quot; id=&quot;parcial&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;tabla-caja&quot;&gt;
+&lt;table class=&quot;tabla&quot;&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Componente&lt;/th&gt;&lt;th class=&quot;num&quot;&gt;Peso&lt;/th&gt;&lt;th class=&quot;num&quot;&gt;Nota&lt;/th&gt;&lt;th
+class=&quot;num&quot;&gt;Aporte&lt;/th&gt;&lt;th class=&quot;num&quot;&gt;Penalización&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody id=&quot;desglose&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class=&quot;tarjeta&quot; aria-labelledby=&quot;titulo-pesos&quot;&gt;
+&lt;h2 id=&quot;titulo-pesos&quot;&gt;Pesos de cada componente (%)&lt;/h2&gt;
+&lt;p class=&quot;ayuda&quot;&gt;Deben sumar 100. Al guardar, el desglose se recalcula.&lt;/p&gt;
+&lt;div class=&quot;campos&quot;&gt;
+&lt;div&gt;&lt;label for=&quot;peso-asistencia&quot;&gt;Asistencia&lt;/label&gt;&lt;input id=&quot;peso-asistencia&quot; type=&quot;number&quot;
+step=&quot;0.1&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;peso-tareas&quot;&gt;Tareas&lt;/label&gt;&lt;input id=&quot;peso-tareas&quot; type=&quot;number&quot; step=&quot;0.1&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;peso-examenes&quot;&gt;Exámenes&lt;/label&gt;&lt;input id=&quot;peso-examenes&quot; type=&quot;number&quot;
+step=&quot;0.1&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;peso-proyecto&quot;&gt;Proyecto en equipo&lt;/label&gt;&lt;input id=&quot;peso-proyecto&quot; type=&quot;number&quot;
+step=&quot;0.1&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;button id=&quot;guardar&quot; class=&quot;boton primario grande&quot;&gt;Guardar pesos&lt;/button&gt;
+&lt;/section&gt;
+&lt;/main&gt;
+&lt;/div&gt;
+&lt;div id=&quot;mensaje&quot; class=&quot;mensaje&quot; role=&quot;status&quot; hidden&gt;&lt;/div&gt;
+&lt;script src=&quot;/js/comun.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/vista_nota_final.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
