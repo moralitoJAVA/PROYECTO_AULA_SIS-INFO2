@@ -24,10 +24,6 @@ class TareaGrupal(Tarea):
         if self.tamano_equipo is None:
             raise ValueError(MSG_SIN_TAMANO)
             
-        # NUEVO: Validación de la penalización (Criterio 3 de la HU exige que sea obligatorio)
-        if self.penalizacion is None:
-            raise ValueError("Debe definir un porcentaje de penalización para tareas grupales") # Puedes crear una constante para este mensaje en constantes.py
-            
         super().registrar(ahora)
 
     def aDiccionario(self):

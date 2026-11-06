@@ -40,7 +40,7 @@ def test_configurar_pesos_cambia_el_resultado():
     nueva = calculadora()
     nueva.configurarPesos(Porcentaje({"asistencia": 100}))
     assert nueva.calcular() == Decimal("90.00")
- class HistorialConDescuento(HistorialFalso):
+class HistorialConDescuento(HistorialFalso):
     def __init__(self, notas, descuento):
         super().__init__(notas)
         self.descuento = Decimal(descuento)
@@ -64,7 +64,7 @@ def test_la_penalizacion_baja_la_nota_de_tareas():
     con_descuento = CalculadoraNotaFinal(
         PESOS, HistorialConDescuento(["100"], "10"), RegistroFalso(None))
     assert con_descuento.calcular() == Decimal("27.00")
- def test_el_desglose_muestra_pendientes_y_la_penalizacion_por_separado():
+def test_el_desglose_muestra_pendientes_y_la_penalizacion_por_separado():
     calc = CalculadoraNotaFinal(PESOS, HistorialConDescuento(["100"], "10"), RegistroFalso(Decimal("100")))
     desglose = calc.obtenerDesglose()
     assert desglose["parcial"] is True

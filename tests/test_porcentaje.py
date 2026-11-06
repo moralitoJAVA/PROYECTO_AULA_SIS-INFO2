@@ -31,7 +31,7 @@ def test_guardar_escribe_los_pesos_en_el_repositorio():
     repositorio = RepositorioMemoria()
     Porcentaje(PESOS).guardar(repositorio)
     assert repositorio.obtener("pesos") == {"asistencia": "10", "tareas": "30", "examenes": "40", "proyecto": "20"}
- from src.constantes import MSG_PESO_NEGATIVO, MSG_PESOS_NO_SUMAN_100
+from src.constantes import MSG_PESO_NEGATIVO, MSG_PESOS_NO_SUMAN_100
  
  
 def test_10_30_40_20_se_acepta():
