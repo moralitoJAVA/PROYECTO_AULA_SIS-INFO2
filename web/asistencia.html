@@ -4,24 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Asistencia</title>
-  <link rel="stylesheet" href="/css/estilos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-  <h1>Asistencia</h1>
-  <nav><a href="/">Inicio</a></nav>
-  <label for="materia">Materia</label>
-  <input id="materia" value="Sistemas de Información 2">
-  <label for="fecha">Fecha de clase</label>
-  <input id="fecha" type="date">
-  <label for="estado">Mi estado</label>
-  <select id="estado"><option>Presente</option><option>Atraso</option><option>Ausente</option><option>Licencia</option></select>
-  <br>
-  <button id="marcar">Guardar asistencia</button>
-  <div id="mensaje" class="mensaje" hidden></div>
-  <div id="alerta" class="mensaje aviso" hidden></div>
-  <p>Porcentaje acumulado: <strong id="porcentaje">pendiente</strong></p>
-  <h2>Mi historial</h2>
-  <table><thead><tr><th>Fecha</th><th>Estado</th></tr></thead><tbody id="historial"></tbody></table>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Asistencia</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/asistencia.html" aria-current="page">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/registro_tarea.html">Registrar tarea</a><a href="/nota_final.html">Nota final</a>
+      </nav>
+    </header>
+    <main>
+      <div id="alerta" class="advertencia" role="alert" hidden>
+        <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="alerta-texto"></p>
+      </div>
+      <section class="tarjeta" aria-labelledby="titulo-porcentaje">
+        <h2 id="titulo-porcentaje">Porcentaje acumulado</h2>
+        <div class="metrica" id="metrica"><span class="metrica-cifra" id="porcentaje">pendiente</span><span class="metrica-nota" id="resumen"></span></div>
+      </section>
+      <section class="tarjeta" aria-labelledby="titulo-marcar">
+        <h2 id="titulo-marcar">Marcar asistencia</h2>
+        <p class="ayuda">Elige la clase y cómo estuviste. Si ya marcaste esa fecha, se actualiza.</p>
+        <div class="campos">
+          <div class="campo-completo"><label for="materia">Materia</label><input id="materia" value="Sistemas de Información 2"></div>
+          <div><label for="fecha">Fecha de clase</label><input id="fecha" type="date"></div>
+          <div><label for="estado">Mi estado</label><select id="estado"><option>Presente</option><option>Atraso</option><option>Ausente</option><option>Licencia</option></select></div>
+        </div>
+        <button id="marcar" class="boton primario grande">Guardar asistencia</button>
+      </section>
+      <section class="tarjeta" aria-labelledby="titulo-historial">
+        <h2 id="titulo-historial">Mi historial</h2>
+        <div class="tabla-caja"><table class="tabla"><thead><tr><th>Fecha</th><th>Estado</th></tr></thead><tbody id="historial"></tbody></table><div id="historial-vacio" class="vacio" hidden>Todavía no marcaste ninguna clase.</div></div>
+      </section>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
   <script src="/js/comun.js"></script>
   <script type="module" src="/js/panel_asistencia.js"></script>
 </body>
