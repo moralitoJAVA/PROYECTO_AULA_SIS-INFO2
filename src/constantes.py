@@ -101,3 +101,39 @@ MSG_PESOS_NO_SUMAN_100 = "Los pesos deben sumar 100%"
 MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
 PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
 
+# ---------------------------------------------------------------
+# HU4: Revisión de tareas en clase
+# ---------------------------------------------------------------
+class ESTADOS_REVISION(Enum):
+    PENDIENTE = "Pendiente"
+    NO_REVISADA = "No revisada"
+    PENDIENTE_DE_REVISION = "Pendiente de revisión"
+    REVISADA = "Revisada"
+    REENTREGA = "Reentrega"
+
+
+PUNTUAL = "Puntual"
+PUNTUALIDAD_TARDIA = "Tardío"
+PUNTUALIDAD_AUSENTE = "Ausente"
+PUNTUALIDAD_LICENCIA = "Licencia"
+PUNTUALIDAD_SIN_REGISTRO = "Sin registrar"
+MOTIVO_ENTREGA_TARDIA = "entrega tardía"
+MOTIVO_LLEGADA_TARDIA = "llegada tardía"
+MOTIVO_INASISTENCIA = "inasistencia a clase"
+SEPARADOR_MOTIVOS = " y "
+FORMATO_NO_REVISADA = "No revisada: {motivos}"
+EXTENSION_PDF = ".pdf"
+TABLA_REVISIONES = "revisiones"
+MAX_OBSERVACIONES = 1000
+MSG_REENTREGA_SIN_PRESENCIA = "Reentrega no habilitada: no tienes asistencia registrada como presente en esa clase"
+MSG_REENTREGA_SIN_ERRORES = "Reentrega no habilitada: la tarea no fue revisada con errores"
+MSG_REENTREGA_NO_HABILITADA = "La reentrega no está habilitada para esta tarea"
+MSG_SOLO_PDF = "La reentrega debe ser un archivo PDF"
+MSG_REENTREGA_SIN_ARCHIVO = "Debes adjuntar un archivo PDF para la reentrega"
+MSG_NO_SE_PUEDE_REVISAR = "La tarea no se puede revisar: debe estar entregada a tiempo y con llegada puntual registrada"
+MSG_CON_ERRORES_INVALIDO = "El campo con_errores debe ser verdadero o falso"
+MSG_OBSERVACIONES_INVALIDAS = "Las observaciones deben ser texto de hasta 1000 caracteres"
+MSG_OBSERVACIONES_OBLIGATORIAS = "Debes escribir observaciones cuando la tarea tiene errores"
+MSG_REENTREGA_REGISTRADA = "Reentrega registrada: tu tarea quedó pendiente de revisión"
+MSG_REENTREGA_FUERA_DE_PLAZO = "Reentrega no habilitada: el plazo terminó en la siguiente clase, donde se revisa de nuevo"
+
