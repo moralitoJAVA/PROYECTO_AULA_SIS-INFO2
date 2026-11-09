@@ -101,3 +101,42 @@ MSG_PESOS_NO_SUMAN_100 = "Los pesos deben sumar 100%"
 MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
 PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
 
+# ---------------------------------------------------------------
+# HU4: Control de lectura
+# ---------------------------------------------------------------
+class ESTADOS_CONTROL(Enum):
+    PENDIENTE = "Pendiente"
+    RESPONDIDO = "Respondido"
+
+
+class PUNTUALIDAD(Enum):
+    A_TIEMPO = "Enviada a tiempo"
+    TARDE = "Enviada tarde"
+
+
+ESTADO_REVISION_TARDE = "Tarde"
+TABLA_LECTURAS = "lecturas"
+TABLA_CONTROLES = "controles_lectura"
+TABLA_RESPUESTAS_CONTROL = "respuestas_control"
+TABLA_ESTUDIANTES_LECTURA = "estudiantes_lectura"
+PUNTAJE_CONTROL_POR_DEFECTO = Decimal("100")
+FORMATO_CONFIRMACION_CONTROL = "Respuestas enviadas el {fecha:%d/%m/%Y} a las {fecha:%H:%M:%S}"
+MSG_LECTURA_SIN_TITULO = "El título de la lectura no puede estar vacío"
+MSG_LECTURA_SIN_AUTOR = "El autor de la lectura no puede estar vacío"
+MSG_LECTURA_SIN_RECURSO = "La lectura debe tener un archivo o un enlace"
+MSG_LECTURA_NO_EXISTE = "La lectura no existe"
+MSG_CONTROL_SIN_TITULO = "El título del control de lectura no puede estar vacío"
+MSG_CONTROL_SIN_LECTURA = "El control debe estar asociado a una lectura"
+MSG_CONTROL_SIN_PREGUNTAS = "El control debe tener al menos una pregunta"
+MSG_PREGUNTA_VACIA = "El enunciado de la pregunta no puede estar vacío"
+MSG_CIERRE_INVALIDO = "El cierre debe ser posterior a la apertura"
+MSG_CONTROL_NO_EXISTE = "El control de lectura no existe"
+MSG_CONTROL_NO_HABILITADO = "El control de lectura no está habilitado para responder"
+MSG_PREGUNTA_OBLIGATORIA = "Falta responder la pregunta obligatoria {numero}"
+MSG_RESPUESTAS_INCOMPLETAS = "Debes enviar una respuesta por cada pregunta del control"
+MSG_CONTROL_YA_ENVIADO = "Ya enviaste este control; solo el docente puede habilitar otro intento"
+MSG_ERROR_GUARDADO = "No se pudieron guardar tus respuestas. El control no fue enviado; inténtalo de nuevo"
+MSG_SOLO_RESPONDIDOS = "Solo se puede calificar un control que ya fue respondido"
+MSG_NOTA_CONTROL_FUERA_DE_RANGO = "La nota debe estar entre 0 y el puntaje máximo del control"
+MSG_PUNTAJE_CONTROL_INVALIDO = "El puntaje máximo del control debe ser mayor que cero"
+MSG_FECHAS_INVALIDAS = "Debes indicar fecha y hora de apertura y de cierre válidas"

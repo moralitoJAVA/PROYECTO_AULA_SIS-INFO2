@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de lectura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/control_lectura.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Control de lectura</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/control_lectura.html" aria-current="page">Control de lectura</a><a href="/docente_lectura.html">Vista docente</a>
+      </nav>
+    </header>
+    <main>
+      <form id="identidad" class="tarjeta">
+        <h2>¿Quién eres?</h2>
+        <p class="ayuda">Escribe tu nombre completo: se guarda junto con tus respuestas.</p>
+        <div class="acciones-fila">
+          <div style="flex:1 1 260px"><label for="nombre" class="ayuda" style="margin-top:0">Nombre del estudiante</label><input id="nombre" required maxlength="80" autocomplete="name" placeholder="Ej.: Ana Pérez"></div>
+          <button class="boton primario" type="submit">Ver mis controles</button>
+        </div>
+      </form>
+
+      <section id="lista-vista" hidden>
+        <div id="lista-vacia" class="vacio tarjeta" hidden>Todavía no hay controles de lectura publicados.</div>
+        <ul id="lista" class="lista-controles"></ul>
+      </section>
+
+      <section id="detalle-vista" hidden>
+        <p><button id="volver" class="boton secundario" type="button">← Volver a mis controles</button></p>
+        <div id="detalle"></div>
+      </section>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+  <script src="/js/comun.js"></script>
+  <script src="/js/comun_lectura.js"></script>
+  <script src="/js/vista_control_lectura.js"></script>
+</body>
+</html>
