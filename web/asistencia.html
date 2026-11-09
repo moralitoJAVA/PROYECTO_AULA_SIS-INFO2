@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Asistencia</title>
+  <title>Puntualidad y Sanción</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-  <body>
 <div class="pagina">
 <header class="cabecera">
     <div>
@@ -18,38 +17,91 @@
         <p class="materia">Sistemas de Información 2 - Control de Fruta</p>
     </div>
     <nav class="navegacion" aria-label="Secciones">
-        <a href="/" aria-current="page">Inicio</a>
-        <a href="/asistencia.html">Puntualidad</a>
-        <a href="/tareas.html">Tareas</a>
-        <a href="/registro_tarea.html">Registrar tarea</a>
+        <a href="/">Inicio</a>
+        <a href="/asistencia.html" aria-current="page">Puntualidad</a>
+        
+        
     </nav>
 </header>
     <main>
       <div id="alerta" class="advertencia" role="alert" hidden>
         <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="alerta-texto"></p>
       </div>
-      <section class="tarjeta" aria-labelledby="titulo-porcentaje">
-        <h2 id="titulo-porcentaje">Porcentaje acumulado</h2>
-        <div class="metrica" id="metrica"><span class="metrica-cifra" id="porcentaje">pendiente</span><span class="metrica-nota" id="resumen"></span></div>
-      </section>
+      
+      <!-- SECCIÓN DE EVALUACIÓN DE INGRESO Y FRUTA (HU 1) -->
       <section class="tarjeta" aria-labelledby="titulo-marcar">
-        <h2 id="titulo-marcar">Marcar asistencia</h2>
-        <p class="ayuda">Elige la clase y cómo estuviste. Si ya marcaste esa fecha, se actualiza.</p>
-        <div class="campos">
-          <div class="campo-completo"><label for="materia">Materia</label><input id="materia" value="Sistemas de Información 2"></div>
-          <div><label for="fecha">Fecha de clase</label><input id="fecha" type="date"></div>
-          <div><label for="estado">Mi estado</label><select id="estado"><option>Presente</option><option>Atraso</option><option>Ausente</option><option>Licencia</option></select></div>
+        <h2 id="titulo-marcar">Control de Ingreso y Sanción</h2>
+        <p class="ayuda">Clases: Martes, Miércoles y Viernes de 06:45 a 08:14. Límite sin sanción: 07:00 a.m.</p>
+        <div class="campos" style="margin-top: 15px;">
+          <div class="campo-completo">
+            <label for="fecha-ingreso">Fecha y Hora de Ingreso</label>
+            <input id="fecha-ingreso" type="datetime-local">
+          </div>
         </div>
-        <button id="marcar" class="boton primario grande">Guardar asistencia</button>
+        <button id="marcar" class="boton primario grande" style="margin-top: 20px;" onclick="evaluarSancionFruta()">Evaluar mi ingreso</button>
+        <div id="resultado-sancion" style="margin-top: 20px; font-size: 1.1em; font-weight: bold;"></div>
       </section>
+
+      <!-- HISTORIAL DE EVALUACIONES -->
       <section class="tarjeta" aria-labelledby="titulo-historial">
-        <h2 id="titulo-historial">Mi historial</h2>
-        <div class="tabla-caja"><table class="tabla"><thead><tr><th>Fecha</th><th>Estado</th></tr></thead><tbody id="historial"></tbody></table><div id="historial-vacio" class="vacio" hidden>Todavía no marcaste ninguna clase.</div></div>
+        <h2 id="titulo-historial">Historial de Puntualidad</h2>
+        <div class="tabla-caja">
+          <table class="tabla">
+            <thead><tr><th>Fecha y Hora</th><th>Estado / Sanción</th></tr></thead>
+            <tbody id="historial"></tbody>
+          </table>
+          <div id="historial-vacio" class="vacio">Todavía no registraste ningún ingreso.</div>
+        </div>
       </section>
     </main>
   </div>
   <div id="mensaje" class="mensaje" role="status" hidden></div>
   <script src="/js/comun.js"></script>
-  <script type="module" src="/js/panel_asistencia.js"></script>
+  <script>
+    function evaluarSancionFruta() {
+        const inputFecha = document.getElementById('fecha-ingreso').value;
+        
+        if (!inputFecha) {
+            alert("Por favor selecciona una fecha y hora");
+            return;
+        }
+
+        // Enviamos la fecha directamente con segundos para que Flask la lea de forma exacta sin conversiones UTC
+        const fechaEnvio = inputFecha.length === 16 ? inputFecha + ":00" : inputFecha;
+
+        fetch('/api/asistencia/evaluar-sancion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ fecha: fechaEnvio })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const contenedor = document.getElementById('resultado-sancion');
+            const tbody = document.getElementById('historial');
+            document.getElementById('historial-vacio').style.display = 'none';
+
+            let textoEstado = "";
+            if (data.estado === "Debe fruta") {
+                textoEstado = `⚠️ <span style="color: #dc2626;">Debe fruta</span> (Ingreso: ${data.hora_ingreso}. Penalización: llevar una fruta).`;
+            } else if (data.estado === "Puntual") {
+                textoEstado = `✅ <span style="color: #16a34a;">Puntual</span> (Ingreso: ${data.hora_ingreso}. ¡Sin sanción!).`;
+            } else {
+                textoEstado = `ℹ️ ${data.estado} (Fuera de horario de clases o día no válido).`;
+            }
+
+            contenedor.innerHTML = textoEstado;
+
+            // Agregar al historial
+            const fila = document.createElement('tr');
+            fila.innerHTML = `<td>${data.hora_ingreso}</td><td>${data.estado}</td>`;
+            tbody.appendChild(fila);
+        })
+        .catch(error => {
+            console.error('Error al evaluar la sanción:', error);
+        });
+    }
+  </script>
 </body>
 </html>
