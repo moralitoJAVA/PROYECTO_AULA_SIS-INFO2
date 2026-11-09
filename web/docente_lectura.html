@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controles de lectura - Docente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/control_lectura.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Vista docente</h1><p class="materia">Controles de lectura · Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/control_lectura.html">Control de lectura</a><a href="/docente_lectura.html" aria-current="page">Vista docente</a>
+      </nav>
+    </header>
+    <main>
+      <form id="form-lectura" class="tarjeta">
+        <h2>1. Registrar lectura</h2>
+        <p class="ayuda">Indica el título, el autor y un archivo o un enlace (al menos uno).</p>
+        <div class="campos">
+          <div><label for="lectura-titulo">Título</label><input id="lectura-titulo" required maxlength="150"></div>
+          <div><label for="lectura-autor">Autor</label><input id="lectura-autor" required maxlength="120"></div>
+          <div><label for="lectura-archivo">Archivo</label><input id="lectura-archivo" placeholder="Ej.: /lecturas/sistemas.pdf"></div>
+          <div><label for="lectura-enlace">Enlace</label><input id="lectura-enlace" type="url" placeholder="https://..."></div>
+        </div>
+        <button class="boton primario grande" type="submit">Registrar lectura</button>
+      </form>
+
+      <form id="form-control" class="tarjeta">
+        <h2>2. Publicar control de lectura</h2>
+        <p class="ayuda">Asócialo a una lectura, escribe las preguntas y define cuándo abre y cierra.</p>
+        <div class="campos">
+          <div><label for="control-titulo">Título del control</label><input id="control-titulo" required maxlength="150" placeholder="Ej.: Control de la clase 5"></div>
+          <div><label for="control-lectura">Lectura asociada</label><select id="control-lectura" required></select></div>
+          <div><label for="control-apertura">Apertura</label><input id="control-apertura" type="datetime-local" required></div>
+          <div><label for="control-cierre">Cierre</label><input id="control-cierre" type="datetime-local" required></div>
+          <div><label for="control-puntaje">Puntaje máximo</label><input id="control-puntaje" type="number" min="0.01" step="0.01" value="100" required></div>
+        </div>
+        <label>Preguntas</label>
+        <ul id="preguntas" class="criterios"></ul>
+        <button id="agregar-pregunta" type="button" class="boton secundario">Agregar pregunta</button>
+        <button class="boton primario grande" type="submit">Publicar control</button>
+      </form>
+
+      <section class="tarjeta">
+        <h2>3. Revisión de respuestas</h2>
+        <p class="ayuda">Elige un control para ver los estudiantes, su estado, y registrar calificación y retroalimentación.</p>
+        <label for="revision-control">Control</label>
+        <select id="revision-control"></select>
+        <div id="revision-vacia" class="vacio" hidden>Todavía no hay estudiantes registrados en este control.</div>
+        <div class="tabla-caja" id="tabla-caja" hidden>
+          <table class="tabla">
+            <thead><tr><th>Estudiante</th><th>Estado</th><th>Envío</th><th class="num">Nota</th><th></th></tr></thead>
+            <tbody id="revision-filas"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="revision-detalle" class="tarjeta" hidden></section>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+  <script src="/js/comun.js"></script>
+  <script src="/js/comun_lectura.js"></script>
+  <script src="/js/vista_revision_docente.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* Control de lectura (HU4): complementa base.css. */
+.lista-controles { display:grid; gap:12px; margin:0; padding:0; list-style:none; }
+.control-item { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 16px; padding:18px 20px; border:1px solid var(--linea); border-radius:16px; background:var(--superficie); }
+.control-item h3 { margin:0 0 2px; font-family:var(--fuente-titulo); font-size:1.15rem; }
+.control-item p { margin:0; color:var(--tinta-suave); font-size:.92rem; }
+.etiquetas { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.lectura-caja { display:grid; gap:2px; padding:14px 16px; border-left:5px solid var(--marca); border-radius:6px 14px 14px 6px; background:var(--marca-suave); }
+.lectura-caja strong { font-family:var(--fuente-titulo); font-size:1.1rem; }
+.lectura-caja a { color:var(--marca-oscura); font-weight:700; }
+.pregunta { margin:0 0 18px; }
+.pregunta label { margin-top:0; }
+.pregunta .obligatoria { color:var(--urgente); }
+.pregunta textarea { min-height:90px; }
+.pregunta textarea:disabled { background:#f3f5fa; color:var(--tinta); }
+.pregunta.falta textarea { border-color:var(--urgente); }
+.respuesta-lectura { margin:0 0 14px; padding:12px 14px; border-radius:10px; background:#f3f5fa; white-space:pre-wrap; }
+.confirmacion { margin:0 0 16px; padding:14px 16px; border-left:5px solid var(--ok); border-radius:6px 14px 14px 6px; background:var(--ok-suave); color:var(--ok); font-weight:700; }
+.calificacion { margin:0 0 16px; padding:14px 16px; border-radius:12px; background:var(--aviso-suave); color:var(--tinta); }
+.calificacion strong { font-family:var(--fuente-titulo); font-size:1.4rem; }
+.fila-acciones { display:flex; flex-wrap:wrap; gap:8px; }
+.boton.chico { padding:6px 12px; font-size:.9rem; }
+.casilla { display:flex; align-items:center; gap:8px; margin:14px 0 0; font-weight:600; }
+.casilla input { width:auto; }
+.pregunta-docente { display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; }
+.pregunta-docente label.casilla { margin:0; white-space:nowrap; }
+@media (max-width:640px) { .pregunta-docente { grid-template-columns:1fr; } }
