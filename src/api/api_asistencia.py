@@ -5,6 +5,8 @@ from flask import Blueprint, jsonify, request
 from src.constantes import MATERIA_POR_DEFECTO, TABLA_ASISTENCIAS
 from src.servicio.servicio_asistencia import ServicioAsistencia
 
+from src.modelo.sancion_llegada import SancionLlegada
+from datetime import datetime
 
 def registrar(app, contexto):
     servicio = ServicioAsistencia(contexto.repositorio(TABLA_ASISTENCIAS))
@@ -32,5 +34,29 @@ def registrar(app, contexto):
             "porcentaje": None if porcentaje is None else str(porcentaje),
             "alerta": servicio.hayAlerta(materia()),
         })
+    @api.post("/api/asistencia/evaluar-sancion")
+    def evaluar_sancion():
+        """
+        Evalúa la llegada del estudiante según la HU-1 (Martes, Miércoles, Viernes y límite 07:00).
+        """
+        sancionador = SancionLlegada()
+        datos = request.get_json() or {}
+        
+        fecha_str = datos.get("fecha")
+        if fecha_str:
+            fecha_obj = datetime.fromisoformat(fecha_str)
+        else:
+            fecha_obj = datetime.now()
+            
+        dia_semana = fecha_obj.weekday()
+        hora_ingreso = fecha_obj.time()
+        
+        estado_sancion = sancionador.evaluar_ingreso(dia_semana, hora_ingreso)
+        
+        return jsonify({
+            "estado": estado_sancion,
+            "hora_ingreso": str(hora_ingreso),
+            "dia_semana": dia_semana
+        }), 200
 
     app.register_blueprint(api)
