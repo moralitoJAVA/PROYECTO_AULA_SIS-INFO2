@@ -1,0 +1,17 @@
+/* Revisión de tareas (HU4). Reutiliza las variables y componentes de base.css. */
+.revisiones { display:grid; gap:16px; margin:0; padding:0; list-style:none; }
+.revision-cabecera { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 12px; margin-bottom:10px; }
+.revision-cabecera h2 { margin:0; }
+.revision-datos { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:10px 18px; margin:0 0 12px; }
+.revision-datos dt { color:var(--tinta-suave); font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+.revision-datos dd { margin:2px 0 0; font-variant-numeric:tabular-nums; }
+.revision-aviso { margin:0 0 12px; padding:10px 14px; border-left:5px solid var(--urgente); border-radius:6px 12px 12px 6px; background:var(--urgente-suave); color:var(--urgente); font-weight:700; }
+.revision-aviso.info { border-left-color:var(--aviso); background:var(--aviso-suave); color:var(--aviso); }
+.revision-obs { margin:0 0 12px; padding:10px 14px; border-radius:10px; background:var(--marca-suave); }
+.revision-accion { margin-top:12px; padding-top:12px; border-top:1px solid var(--linea); }
+.revision-accion h3 { margin:0 0 4px; font-size:1rem; }
+.revision-accion .opciones { display:flex; flex-wrap:wrap; gap:6px 18px; margin:8px 0; }
+.revision-accion .opciones label { display:flex; align-items:center; gap:6px; margin:0; font-weight:400; }
+.revision-accion .opciones input { width:auto; }
+.revision-historial { margin:12px 0 0; padding-left:20px; color:var(--tinta-suave); font-size:.92rem; }
+@media (max-width:640px) { .revision-datos { grid-template-columns:1fr; } }
