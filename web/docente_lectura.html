@@ -3,56 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controles de lectura - Docente</title>
+  <title>Panel docente - Apuntes y lectura</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/control_lectura.css">
+  <link rel="stylesheet" href="/css/apuntes_lectura.css">
 </head>
 <body>
   <div class="pagina">
     <header class="cabecera">
-      <div><h1>Vista docente</h1><p class="materia">Controles de lectura · Sistemas de Información 2</p></div>
+      <div><h1>Panel docente</h1><p class="materia">Apoyo a la app del estudiante · Sistemas de Información 2</p></div>
       <nav class="navegacion" aria-label="Secciones">
-        <a href="/">Inicio</a><a href="/control_lectura.html">Control de lectura</a><a href="/docente_lectura.html" aria-current="page">Vista docente</a>
+        <a href="/">Inicio</a><a href="/apuntes_lectura.html">Vista del estudiante</a><a href="/docente_lectura.html" aria-current="page">Panel docente</a>
       </nav>
     </header>
     <main>
       <form id="form-lectura" class="tarjeta">
-        <h2>1. Registrar lectura</h2>
-        <p class="ayuda">Indica el título, el autor y un archivo o un enlace (al menos uno).</p>
+        <h2>1. Enviar texto de bibliografía</h2>
+        <p class="ayuda">Título y un archivo o un enlace (al menos uno). El autor es opcional.</p>
         <div class="campos">
           <div><label for="lectura-titulo">Título</label><input id="lectura-titulo" required maxlength="150"></div>
-          <div><label for="lectura-autor">Autor</label><input id="lectura-autor" required maxlength="120"></div>
+          <div><label for="lectura-autor">Autor (opcional)</label><input id="lectura-autor" maxlength="120"></div>
           <div><label for="lectura-archivo">Archivo</label><input id="lectura-archivo" placeholder="Ej.: /lecturas/sistemas.pdf"></div>
           <div><label for="lectura-enlace">Enlace</label><input id="lectura-enlace" type="url" placeholder="https://..."></div>
         </div>
-        <button class="boton primario grande" type="submit">Registrar lectura</button>
+        <button class="boton primario grande" type="submit">Registrar texto</button>
       </form>
 
-      <form id="form-control" class="tarjeta">
-        <h2>2. Publicar control de lectura</h2>
-        <p class="ayuda">Asócialo a una lectura, escribe las preguntas y define cuándo abre y cierra.</p>
+      <form id="form-clase" class="tarjeta">
+        <h2>2. Publicar clase con su bibliografía</h2>
+        <p class="ayuda">Los estudiantes verán los textos antes de la clase. La pregunta la planteas tú en clase: el sistema no la genera, solo recibe sus respuestas.</p>
         <div class="campos">
-          <div><label for="control-titulo">Título del control</label><input id="control-titulo" required maxlength="150" placeholder="Ej.: Control de la clase 5"></div>
-          <div><label for="control-lectura">Lectura asociada</label><select id="control-lectura" required></select></div>
-          <div><label for="control-apertura">Apertura</label><input id="control-apertura" type="datetime-local" required></div>
-          <div><label for="control-cierre">Cierre</label><input id="control-cierre" type="datetime-local" required></div>
-          <div><label for="control-puntaje">Puntaje máximo</label><input id="control-puntaje" type="number" min="0.01" step="0.01" value="100" required></div>
+          <div class="campo-completo"><label for="clase-tema">Tema de la clase</label><input id="clase-tema" required maxlength="150" placeholder="Ej.: Clase 5: sistemas"></div>
+          <div><label for="clase-inicio">Inicio de la clase</label><input id="clase-inicio" type="datetime-local" required></div>
+          <div><label for="clase-cierre">Plazo para responder ("A tiempo" hasta)</label><input id="clase-cierre" type="datetime-local" required></div>
         </div>
-        <label>Preguntas</label>
-        <ul id="preguntas" class="criterios"></ul>
-        <button id="agregar-pregunta" type="button" class="boton secundario">Agregar pregunta</button>
-        <button class="boton primario grande" type="submit">Publicar control</button>
+        <label>Bibliografía de la clase</label>
+        <div id="clase-lecturas"></div>
+        <button class="boton primario grande" type="submit">Publicar clase</button>
       </form>
 
       <section class="tarjeta">
-        <h2>3. Revisión de respuestas</h2>
-        <p class="ayuda">Elige un control para ver los estudiantes, su estado, y registrar calificación y retroalimentación.</p>
-        <label for="revision-control">Control</label>
-        <select id="revision-control"></select>
-        <div id="revision-vacia" class="vacio" hidden>Todavía no hay estudiantes registrados en este control.</div>
+        <h2>3. Respuestas de la clase</h2>
+        <p class="ayuda">Elige una clase para ver quién respondió, calificar, dar retroalimentación o habilitar otro intento.</p>
+        <label for="revision-clase">Clase</label>
+        <select id="revision-clase"></select>
+        <div id="revision-vacia" class="vacio" hidden>Todavía no hay estudiantes registrados en esta clase.</div>
         <div class="tabla-caja" id="tabla-caja" hidden>
           <table class="tabla">
             <thead><tr><th>Estudiante</th><th>Estado</th><th>Envío</th><th class="num">Nota</th><th></th></tr></thead>
@@ -67,6 +64,6 @@
   <div id="mensaje" class="mensaje" role="status" hidden></div>
   <script src="/js/comun.js"></script>
   <script src="/js/comun_lectura.js"></script>
-  <script src="/js/vista_revision_docente.js"></script>
+  <script src="/js/vista_docente_lectura.js"></script>
 </body>
 </html>

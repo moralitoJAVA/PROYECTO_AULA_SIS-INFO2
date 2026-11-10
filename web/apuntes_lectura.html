@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apuntes y lectura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/apuntes_lectura.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Apuntes y lectura</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/apuntes_lectura.html" aria-current="page">Apuntes y lectura</a>
+      </nav>
+    </header>
+    <main>
+      <form id="identidad" class="tarjeta">
+        <h2>¿Quién eres?</h2>
+        <p class="ayuda">Escribe tu nombre completo: se guarda junto con tus apuntes y tu respuesta.</p>
+        <div class="acciones-fila">
+          <div style="flex:1 1 260px"><label for="nombre" class="ayuda" style="margin-top:0">Nombre del estudiante</label><input id="nombre" required maxlength="80" autocomplete="name" placeholder="Ej.: Ana Pérez"></div>
+          <button class="boton primario" type="submit">Ver mis clases</button>
+        </div>
+      </form>
+
+      <section id="lista-vista" hidden>
+        <div id="lista-vacia" class="vacio tarjeta" hidden>Tu docente todavía no publicó ninguna clase con bibliografía.</div>
+        <ul id="lista" class="lista-clases"></ul>
+      </section>
+
+      <section id="detalle-vista" hidden>
+        <p><button id="volver" class="boton secundario" type="button">← Volver a mis clases</button></p>
+        <div class="tarjeta" id="det-cabecera"></div>
+
+        <div class="tarjeta">
+          <h2>1. Bibliografía de la clase</h2>
+          <p class="ayuda">Textos que envió tu docente. Léelos antes de la clase.</p>
+          <ul id="det-biblio" class="lista-biblio"></ul>
+        </div>
+
+        <div class="tarjeta">
+          <h2>2. Mis apuntes</h2>
+          <p class="ayuda">Cada apunte pertenece a esta clase y a uno de los textos de la bibliografía.</p>
+          <form id="form-apunte" novalidate>
+            <label for="apunte-lectura">Texto de la bibliografía</label>
+            <select id="apunte-lectura"></select>
+            <label for="apunte-texto">Apunte</label>
+            <textarea id="apunte-texto" rows="3" placeholder="Idea principal, definición, ejemplo..."></textarea>
+            <button class="boton primario" type="submit" style="margin-top:12px">Guardar apunte</button>
+          </form>
+          <ul id="lista-apuntes" class="lista-notas" style="margin-top:16px"></ul>
+        </div>
+
+        <div class="tarjeta">
+          <h2>3. Mis dudas</h2>
+          <p class="ayuda">Anótalas ahora y plantéalas después de la explicación del docente.</p>
+          <form id="form-duda" novalidate>
+            <label for="duda-texto">Duda</label>
+            <textarea id="duda-texto" rows="2" placeholder="¿Qué no te quedó claro?"></textarea>
+            <button class="boton primario" type="submit" style="margin-top:12px">Guardar duda</button>
+          </form>
+          <ul id="lista-dudas" class="lista-notas" style="margin-top:16px"></ul>
+        </div>
+
+        <div class="tarjeta" id="caja-respuesta"></div>
+      </section>
+      <p class="pie-docente"><a href="/docente_lectura.html">¿Eres docente? Entra al panel docente</a></p>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+  <script src="/js/comun.js"></script>
+  <script src="/js/comun_lectura.js"></script>
+  <script src="/js/vista_apuntes_lectura.js"></script>
+</body>
+</html>
