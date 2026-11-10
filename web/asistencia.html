@@ -3,115 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Puntualidad y Sanción</title>
+  <title>Asistencia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-<div class="pagina">
-<header class="cabecera">
-    <div>
-        <h1>Puntualidad y Sanción</h1>
-        <p class="materia">Sistemas de Información 2 - Control de Fruta</p>
-    </div>
-    <nav class="navegacion" aria-label="Secciones">
-        <a href="/">Inicio</a>
-        <a href="/asistencia.html" aria-current="page">Puntualidad</a>
-    </nav>
-</header>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Asistencia</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/asistencia.html" aria-current="page">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/revision_tareas.html">Revisión</a>
+      </nav>
+    </header>
     <main>
       <div id="alerta" class="advertencia" role="alert" hidden>
         <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="alerta-texto"></p>
       </div>
-
-      <!-- SECCIÓN DE EVALUACIÓN DE INGRESO Y FRUTA (HU 1) -->
-      <section class="tarjeta" aria-labelledby="titulo-marcar">
-        <h2 id="titulo-marcar">Control de Ingreso y Sanción</h2>
-        <p class="ayuda">Clases: Martes, Miércoles y Viernes de 06:45 a 08:14. Límite sin sanción: 07:00 a.m.</p>
-        <div class="campos" style="margin-top: 15px;">
-          <div class="campo-completo">
-            <label for="fecha-ingreso">Fecha y Hora de Ingreso</label>
-            <input id="fecha-ingreso" type="datetime-local">
-          </div>
+      <section class="tarjeta" aria-labelledby="titulo-ingreso">
+        <h2 id="titulo-ingreso">Mi ingreso al salón</h2>
+        <p class="ayuda">Clases: martes, miércoles y viernes de 06:45 a 08:14. Ingresar hasta las 07:00 es puntual; después de las 07:00 debes fruta para la próxima clase.</p>
+        <div id="fruta-aviso" class="advertencia" role="status" hidden>
+          <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="fruta-aviso-texto"></p>
         </div>
-        <button id="marcar" class="boton primario grande" style="margin-top: 20px;" onclick="evaluarSancionFruta()">Evaluar mi ingreso</button>
-        <div id="resultado-sancion" style="margin-top: 20px; font-size: 1.1em; font-weight: bold;"></div>
+        <div class="campos">
+          <div class="campo-completo"><label for="ingreso-fecha">Fecha y hora de ingreso (opcional)</label><input id="ingreso-fecha" type="datetime-local" step="1"><p class="ayuda">Déjala vacía para registrar la hora actual.</p></div>
+        </div>
+        <button id="ingreso-registrar" class="boton primario grande">Registrar mi ingreso</button>
+        <p id="ingreso-resultado" class="ayuda" role="status"></p>
+        <div class="tabla-caja"><table class="tabla"><thead><tr><th>Fecha</th><th>Hora de ingreso</th><th>Estado</th></tr></thead><tbody id="ingreso-historial"></tbody></table><div id="ingreso-vacio" class="vacio" hidden>Todavía no registraste ningún ingreso.</div></div>
       </section>
-
-      <!-- HISTORIAL DE EVALUACIONES -->
-      <section class="tarjeta" aria-labelledby="titulo-historial">
-        <h2 id="titulo-historial">Historial de Puntualidad</h2>
-        <div class="tabla-caja">
-          <table class="tabla">
-            <thead><tr><th>Fecha y Hora</th><th>Estado / Sanción</th></tr></thead>
-            <tbody id="historial"></tbody>
-          </table>
-          <div id="historial-vacio" class="vacio">Todavía no registraste ningún ingreso.</div>
+      <section class="tarjeta" aria-labelledby="titulo-porcentaje">
+        <h2 id="titulo-porcentaje">Porcentaje acumulado</h2>
+        <div class="metrica" id="metrica"><span class="metrica-cifra" id="porcentaje">pendiente</span><span class="metrica-nota" id="resumen"></span></div>
+      </section>
+      <section class="tarjeta" aria-labelledby="titulo-marcar">
+        <h2 id="titulo-marcar">Marcar asistencia</h2>
+        <p class="ayuda">Elige la clase y cómo estuviste. Si ya marcaste esa fecha, se actualiza.</p>
+        <div class="campos">
+          <div class="campo-completo"><label for="materia">Materia</label><input id="materia" value="Sistemas de Información 2"></div>
+          <div><label for="fecha">Fecha de clase</label><input id="fecha" type="date"></div>
+          <div><label for="estado">Mi estado</label><select id="estado"><option>Presente</option><option>Atraso</option><option>Ausente</option><option>Licencia</option></select></div>
         </div>
+        <button id="marcar" class="boton primario grande">Guardar asistencia</button>
+      </section>
+      <section class="tarjeta" aria-labelledby="titulo-historial">
+        <h2 id="titulo-historial">Mi historial</h2>
+        <div class="tabla-caja"><table class="tabla"><thead><tr><th>Fecha</th><th>Estado</th></tr></thead><tbody id="historial"></tbody></table><div id="historial-vacio" class="vacio" hidden>Todavía no marcaste ninguna clase.</div></div>
       </section>
     </main>
   </div>
   <div id="mensaje" class="mensaje" role="status" hidden></div>
   <script src="/js/comun.js"></script>
-  <script>
-    function evaluarSancionFruta() {
-        const inputFecha = document.getElementById('fecha-ingreso').value;
-
-        if (!inputFecha) {
-            alert("Por favor selecciona una fecha y hora");
-            return;
-        }
-
-        const fechaLimpia = inputFecha.replace(' ', 'T');
-        const fechaEnvio = fechaLimpia.length === 16 ? fechaLimpia + ":00" : fechaLimpia;
-
-        fetch('/api/asistencia/evaluar-sancion', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fecha: fechaEnvio })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error en el servidor Flask (Código " + response.status + ")");
-            }
-            return response.json();
-        })
-        .then(data => {
-            const contenedor = document.getElementById('resultado-sancion');
-            const tbody = document.getElementById('historial');
-            const vacio = document.getElementById('historial-vacio');
-            if (vacio) vacio.style.display = 'none';
-
-            let textoEstado = "";
-            let colorEstilo = "";
-
-            if (data.estado === "Debe fruta") {
-                textoEstado = `⚠️ Debe fruta (Ingreso: ${data.hora_ingreso}. Penalización: llevar una fruta la próxima clase).`;
-                colorEstilo = "#dc2626";
-            } else if (data.estado === "Puntual") {
-                textoEstado = `✅ Puntual (Ingreso: ${data.hora_ingreso}. ¡Sin sanción!).`;
-                colorEstilo = "#16a34a";
-            } else {
-                textoEstado = `ℹ️ Fuera de horario o día no válido (${data.estado}).`;
-                colorEstilo = "#d97706";
-            }
-
-            contenedor.innerHTML = `<span style="color: ${colorEstilo};">${textoEstado}</span>`;
-
-            // Agregar al historial de la tabla de forma dinámica
-            const fila = document.createElement('tr');
-            fila.innerHTML = `<td>${data.fecha_completa || data.hora_ingreso}</td><td><span style="color: ${colorEstilo}; font-weight: bold;">${data.estado}</span></td>`;
-            tbody.appendChild(fila);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Ocurrió un error al conectar con el servidor: " + error.message);
-        });
-    }
-  </script>
+  <script src="/js/ingreso_fruta.js"></script>
+  <script type="module" src="/js/panel_asistencia.js"></script>
 </body>
 </html>

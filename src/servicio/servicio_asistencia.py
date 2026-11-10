@@ -58,3 +58,9 @@ class ServicioAsistencia:
 
     def hayAlerta(self, materia):
         return self.crearRegistro(materia).hayAlerta()
+            
+    def guardarAsistencia(self, materia, fecha, estado):
+        """Registra la asistencia de la clase o la actualiza si ya existía."""
+        if self.abrirSesion(materia, fecha).asistencia.existePara(fecha):
+            return self.editarAsistencia(materia, fecha, estado)
+        return self.registrarAsistencia(materia, fecha, estado)

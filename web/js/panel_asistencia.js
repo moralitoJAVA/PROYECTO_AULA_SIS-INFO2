@@ -46,8 +46,11 @@ async function marcarEstado() {
 function mostrarResumen(resumen) { document.getElementById("resumen").textContent = resumen; }
 const CLASE_ESTADO = { Presente: "ok", Atraso: "aviso", Ausente: "urgente", Licencia: "info" };
 function mostrarHistorial(historial) {
-  document.getElementById("historial").innerHTML = historial.map(([fecha, estado]) =>
-    `<tr><td>${escapar(fecha)}</td><td><span class="etiqueta ${CLASE_ESTADO[estado] || ""}">${escapar(estado)}</span></td></tr>`).join("");
+  document.getElementById("historial").innerHTML = historial.map(([fecha, estado]) => {
+    const fruta = estado === "Atraso"
+      ? ` <span class="etiqueta urgente" title="Debes llevar una fruta a la siguiente clase">Debe fruta</span>` : "";
+    return `<tr><td>${escapar(fecha)}</td><td><span class="etiqueta ${CLASE_ESTADO[estado] || ""}">${escapar(estado)}</span>${fruta}</td></tr>`;
+  }).join("");
   document.getElementById("historial-vacio").hidden = historial.length > 0;
 }
 function mostrarAlerta(hayAlerta) {
@@ -62,6 +65,8 @@ for (const id of ["materia", "fecha", "estado"]) {
 }
 document.getElementById("materia").addEventListener("input", guardarFormulario);
 document.getElementById("marcar").addEventListener("click", marcarEstado);
+window.addEventListener("asistencia-actualizada", () => mostrarMisClases().catch((error) => mostrarMensaje("mensaje", error.message, "error")));
+
 mostrarMisClases().then(() => {
   if (seRestauroFormulario) mostrarMensaje("mensaje", "Se restauraron tus preferencias de asistencia.");
 }).catch((error) => mostrarMensaje("mensaje", error.message, "error"));
