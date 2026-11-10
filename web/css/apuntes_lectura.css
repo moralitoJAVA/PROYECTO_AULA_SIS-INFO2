@@ -22,4 +22,7 @@ textarea { min-height:90px; }
 .boton.chico { padding:6px 12px; font-size:.9rem; }
 .casilla { display:flex; align-items:center; gap:8px; margin:8px 0 0; font-weight:600; }
 .casilla input { width:auto; }
-.pie-docente { margin-top:32px; color:var(--tinta-suave); font-size:.9rem; text-align:center; }
+.campo-nombre { flex:1 1 260px; }
+.campo-nombre label { margin-top:0; }
+.boton.separado { margin-top:12px; }
+.lista-notas.separada { margin-top:16px; }

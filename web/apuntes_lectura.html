@@ -23,7 +23,7 @@
         <h2>¿Quién eres?</h2>
         <p class="ayuda">Escribe tu nombre completo: se guarda junto con tus apuntes y tu respuesta.</p>
         <div class="acciones-fila">
-          <div style="flex:1 1 260px"><label for="nombre" class="ayuda" style="margin-top:0">Nombre del estudiante</label><input id="nombre" required maxlength="80" autocomplete="name" placeholder="Ej.: Ana Pérez"></div>
+          <div class="campo-nombre"><label for="nombre" class="ayuda">Nombre del estudiante</label><input id="nombre" required maxlength="80" autocomplete="name" placeholder="Ej.: Ana Pérez"></div>
           <button class="boton primario" type="submit">Ver mis clases</button>
         </div>
       </form>
@@ -51,9 +51,9 @@
             <select id="apunte-lectura"></select>
             <label for="apunte-texto">Apunte</label>
             <textarea id="apunte-texto" rows="3" placeholder="Idea principal, definición, ejemplo..."></textarea>
-            <button class="boton primario" type="submit" style="margin-top:12px">Guardar apunte</button>
+            <button class="boton primario separado" type="submit">Guardar apunte</button>
           </form>
-          <ul id="lista-apuntes" class="lista-notas" style="margin-top:16px"></ul>
+          <ul id="lista-apuntes" class="lista-notas separada"></ul>
         </div>
 
         <div class="tarjeta">
@@ -62,14 +62,14 @@
           <form id="form-duda" novalidate>
             <label for="duda-texto">Duda</label>
             <textarea id="duda-texto" rows="2" placeholder="¿Qué no te quedó claro?"></textarea>
-            <button class="boton primario" type="submit" style="margin-top:12px">Guardar duda</button>
+            <button class="boton primario separado" type="submit">Guardar duda</button>
           </form>
           <ul id="lista-dudas" class="lista-notas" style="margin-top:16px"></ul>
         </div>
 
         <div class="tarjeta" id="caja-respuesta"></div>
       </section>
-      <p class="pie-docente"><a href="/docente_lectura.html">¿Eres docente? Entra al panel docente</a></p>
+      
     </main>
   </div>
   <div id="mensaje" class="mensaje" role="status" hidden></div>
