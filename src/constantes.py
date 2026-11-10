@@ -148,3 +148,28 @@ MSG_SOLO_RESPONDIDOS = "Solo se puede calificar una respuesta que ya fue enviada
 MSG_NOTA_RESPUESTA_FUERA_DE_RANGO = "La nota debe estar entre 0 y el puntaje máximo"
 MSG_PDF_NO_EXISTE = "Todavía no hay un PDF de respuesta para este estudiante"
 PUNTAJE_RESPUESTA_POR_DEFECTO = Decimal("100")
+
+
+# ---------------------------------------------------------------
+# HU2: Envío de tareas al correo electrónico del docente (vista del estudiante)
+# ---------------------------------------------------------------
+class ESTADOS_ENVIO(Enum):
+    PENDIENTE = "Pendiente"
+    ENTREGADA = "Entregada"
+
+
+class PUNTUALIDAD_ENTREGA(Enum):
+    A_TIEMPO = "Entregada a tiempo"
+    TARDE = "Entregada tarde"
+
+
+TABLA_MATERIAS = "materias"
+TABLA_ENVIOS_TAREA = "envios_tarea"
+FORMATO_FECHA_HORA_ENVIO = "{fecha:%d/%m/%Y %H:%M:%S}"
+ASUNTO_ENVIO_TAREA = "[{materia}] {tarea} - {estudiante}"
+FORMATO_CONFIRMACION_ENVIO = "Tarea enviada a {docente} el {fecha:%d/%m/%Y %H:%M:%S}. Estado: {estado}"
+MSG_MATERIA_SIN_DOCENTE = "La materia no tiene un correo de docente asignado"
+MSG_SIN_ADJUNTOS = "Debes adjuntar al menos un archivo antes de enviar la tarea"
+MSG_ERROR_ENVIO_CORREO = "No se pudo enviar el correo al docente. La tarea no quedó registrada como entregada"
+MSG_REENTREGA_NO_HABILITADA = "Ya enviaste esta tarea; solo el docente puede habilitar una reentrega"
+MSG_ENVIO_NO_EXISTE = "No existe un envío para esta tarea y estudiante"
