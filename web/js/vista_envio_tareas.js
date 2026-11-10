@@ -48,6 +48,25 @@ async function enviarTarea(evento) {
   }
 }
 
+async function guardarDocente(evento) {
+  evento.preventDefault();
+  try {
+    const datos = await llamarApi("/api/materias", {
+      method: "POST",
+      body: JSON.stringify({
+        materia: document.getElementById("materia-docente").value,
+        correo_docente: document.getElementById("correo-docente").value,
+      }),
+    });
+    campoMateria.value = datos.materia;
+    await mostrarDocente();
+    mostrarMensaje("mensaje", `Correo del docente guardado para ${datos.materia}`, "exito");
+  } catch (error) {
+    mostrarMensaje("mensaje", error.message, "error");
+  }
+}
+
 campoMateria.addEventListener("blur", mostrarDocente);
+document.getElementById("formulario-docente").addEventListener("submit", guardarDocente);
 document.getElementById("formulario").addEventListener("submit", enviarTarea);
 mostrarDocente();
