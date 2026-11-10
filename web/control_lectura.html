@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de lectura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/apuntes_lectura.css">
+  <link rel="stylesheet" href="/css/control_lectura.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Control de lectura</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/apuntes_lectura.html">Apuntes y lectura</a><a href="/control_lectura.html" aria-current="page">Control de lectura</a>
+      </nav>
+    </header>
+    <main>
+      <form id="identidad" class="tarjeta">
+        <h2>¿Quién eres?</h2>
+        <p class="ayuda">Escribe tu nombre completo: se guarda junto con tus apuntes y tu respuesta.</p>
+        <div class="acciones-fila">
+          <div class="campo-nombre"><label for="nombre" class="ayuda">Nombre del estudiante</label><input id="nombre" required maxlength="80" autocomplete="name" placeholder="Ej.: Ana Pérez"></div>
+          <button class="boton primario" type="submit">Ver mis clases</button>
+        </div>
+      </form>
+
+      <section id="tablero" hidden>
+        <div id="sin-clases" class="vacio tarjeta" hidden>Todavía no hay ninguna clase publicada.</div>
+
+        <div id="selector-clase" class="tarjeta selector-clase" hidden>
+          <label for="clase-select">Clase</label>
+          <select id="clase-select"></select>
+          <div id="clase-resumen"></div>
+        </div>
+
+        <ul id="pasos" class="pasos" hidden>
+          <li><button class="paso" type="button" data-paso="1" aria-selected="true"><span class="paso-num">1</span><span class="paso-texto"><strong>Antes de la clase</strong><small id="progreso-lectura"></small></span></button></li>
+          <li><button class="paso" type="button" data-paso="2" aria-selected="false"><span class="paso-num">2</span><span class="paso-texto"><strong>En clase</strong><small id="progreso-dudas"></small></span></button></li>
+          <li><button class="paso" type="button" data-paso="3" aria-selected="false"><span class="paso-num">3</span><span class="paso-texto"><strong>Pregunta del docente</strong><small id="progreso-respuesta"></small></span></button></li>
+        </ul>
+
+        <div id="panel-1" hidden>
+          <div class="tarjeta" id="bloque-docente">
+            <h2>Lecturas del docente</h2>
+            <p class="ayuda">Léelas antes de la clase y anota lo importante de cada una.</p>
+            <ul id="lecturas" class="lista-lecturas"></ul>
+          </div>
+          <div class="tarjeta">
+            <h2>Mis fuentes <span class="etiqueta info" id="cuenta-fuentes">0</span></h2>
+            <p class="ayuda">Agrega las fuentes que encuentres por tu cuenta y anota lo importante de cada una.</p>
+            <form id="form-fuente" class="form-fuente" novalidate>
+              <div><label for="fuente-titulo">Título</label><input id="fuente-titulo" maxlength="150" autocomplete="off"></div>
+              <div><label for="fuente-enlace">Enlace (opcional)</label><input id="fuente-enlace" type="url" placeholder="https://..."></div>
+              <button class="boton primario" type="submit">Agregar fuente</button>
+            </form>
+            <ul id="fuentes" class="lista-lecturas"></ul>
+          </div>
+        </div>
+
+        <div id="panel-2" hidden>
+          <div class="tarjeta">
+            <h2>Mis dudas</h2>
+            <p class="ayuda">Anótalas y pregúntalas después de la explicación del docente.</p>
+            <form id="form-duda" novalidate>
+              <label for="duda-texto">Duda</label>
+              <textarea id="duda-texto" rows="2" placeholder="¿Qué no te quedó claro?"></textarea>
+              <button class="boton primario separado" type="submit">Agregar duda</button>
+            </form>
+            <h3 class="subtitulo">Por preguntar <span class="etiqueta aviso" id="cuenta-pendientes">0</span></h3>
+            <ul id="dudas-pendientes" class="lista-notas"></ul>
+            <h3 class="subtitulo">Ya explicadas <span class="etiqueta ok" id="cuenta-resueltas">0</span></h3>
+            <ul id="dudas-resueltas" class="lista-notas"></ul>
+          </div>
+        </div>
+
+        <div id="panel-3" class="tarjeta" hidden></div>
+      </section>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+  <script src="/js/comun.js"></script>
+  <script src="/js/comun_lectura.js"></script>
+  <script src="/js/vista_control_lectura.js"></script>
+</body>
+</html>

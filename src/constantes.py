@@ -101,3 +101,114 @@ MSG_PESOS_NO_SUMAN_100 = "Los pesos deben sumar 100%"
 MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
 PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
 
+# ---------------------------------------------------------------
+# HU3: Apuntes, lectura y respuesta a pregunta de clase (vista del estudiante)
+# ---------------------------------------------------------------
+class ESTADOS_RESPUESTA(Enum):
+    PENDIENTE = "Pendiente"
+    RESPONDIDO = "Respondido"
+
+
+class PUNTUALIDAD(Enum):
+    A_TIEMPO = "A tiempo"
+    TARDE = "Tarde"
+
+
+class VENTANA_CLASE(Enum):
+    ANTES_DE_CLASE = "Antes de la clase"
+    DENTRO_DEL_PLAZO = "Dentro del plazo"
+    PLAZO_VENCIDO = "Plazo vencido"
+
+
+TABLA_LECTURAS = "lecturas"
+TABLA_CLASES_LECTURA = "clases_lectura"
+TABLA_APUNTES_LECTURA = "apuntes_lectura"
+TABLA_RESPUESTAS_CLASE = "respuestas_clase"
+TABLA_ESTUDIANTES_LECTURA = "estudiantes_lectura"
+CARPETA_PDF_POR_DEFECTO = "entregas_pdf"
+FORMATO_CONFIRMACION_RESPUESTA = "Respuesta enviada el {fecha:%d/%m/%Y} a las {fecha:%H:%M:%S}"
+FORMATO_FECHA_HORA_PDF = "{fecha:%d/%m/%Y} {fecha:%H:%M:%S}"
+MSG_LECTURA_SIN_TITULO = "El título del texto de la bibliografía no puede estar vacío"
+MSG_LECTURA_SIN_RECURSO = "El texto debe tener un archivo o un enlace"
+MSG_LECTURA_NO_EXISTE = "El texto de la bibliografía no existe"
+MSG_CLASE_SIN_TEMA = "El tema de la clase no puede estar vacío"
+MSG_CLASE_SIN_BIBLIOGRAFIA = "La clase debe tener al menos un texto de bibliografía"
+MSG_CLASE_CIERRE_INVALIDO = "El plazo de respuesta debe ser posterior al inicio de la clase"
+MSG_CLASE_NO_EXISTE = "La clase no existe"
+MSG_FECHAS_INVALIDAS = "Debes indicar fecha y hora válidas para la clase y para el plazo de respuesta"
+MSG_APUNTE_SIN_LECTURA = "Elige el texto de la bibliografía al que pertenece el apunte"
+MSG_LECTURA_FUERA_DE_CLASE = "Ese texto no pertenece a la bibliografía de la clase"
+MSG_DUDA_VACIA = "La duda no puede estar vacía"
+MSG_DUDA_NO_EXISTE = "La duda no existe"
+MSG_FUENTE_SIN_TITULO = "El título de la fuente no puede estar vacío"
+MSG_FUENTE_NO_EXISTE = "La fuente no existe"
+MSG_APUNTE_DOS_ORIGENES = "El apunte pertenece a un texto de la bibliografía o a una fuente propia, no a ambos"
+MSG_CAMPOS_OBLIGATORIOS = "Completa los campos obligatorios: {campos}"
+MSG_CLASE_NO_INICIADA = "La pregunta se plantea en clase: aún no puedes responder"
+MSG_RESPUESTA_YA_ENVIADA = "Ya enviaste tu respuesta; solo el docente puede habilitar otro intento"
+MSG_ERROR_GUARDADO = "No se pudo guardar tu respuesta. No fue enviada; inténtalo de nuevo"
+MSG_SOLO_RESPONDIDOS = "Solo se puede calificar una respuesta que ya fue enviada"
+MSG_NOTA_RESPUESTA_FUERA_DE_RANGO = "La nota debe estar entre 0 y el puntaje máximo"
+MSG_PDF_NO_EXISTE = "Todavía no hay un PDF de respuesta para este estudiante"
+PUNTAJE_RESPUESTA_POR_DEFECTO = Decimal("100")
+
+
+# ---------------------------------------------------------------
+# HU2: Envío de tareas al correo electrónico del docente (vista del estudiante)
+# ---------------------------------------------------------------
+class ESTADOS_ENVIO(Enum):
+    PENDIENTE = "Pendiente"
+    ENTREGADA = "Entregada"
+
+
+class PUNTUALIDAD_ENTREGA(Enum):
+    A_TIEMPO = "Entregada a tiempo"
+    TARDE = "Entregada tarde"
+
+
+TABLA_MATERIAS = "materias"
+TABLA_ENVIOS_TAREA = "envios_tarea"
+FORMATO_FECHA_HORA_ENVIO = "{fecha:%d/%m/%Y %H:%M:%S}"
+ASUNTO_ENVIO_TAREA = "[{materia}] {tarea} - {estudiante}"
+FORMATO_CONFIRMACION_ENVIO = "Tarea enviada a {docente} el {fecha:%d/%m/%Y %H:%M:%S}. Estado: {estado}"
+MSG_MATERIA_SIN_DOCENTE = "La materia no tiene un correo de docente asignado"
+MSG_SIN_ADJUNTOS = "Debes adjuntar al menos un archivo antes de enviar la tarea"
+MSG_ERROR_ENVIO_CORREO = "No se pudo enviar el correo al docente. La tarea no quedó registrada como entregada"
+MSG_REENTREGA_NO_HABILITADA = "Ya enviaste esta tarea; solo el docente puede habilitar una reentrega"
+MSG_ENVIO_NO_EXISTE = "No existe un envío para esta tarea y estudiante"
+
+# ---------------------------------------------------------------
+# HU4: Revisión de tareas en clase
+# ---------------------------------------------------------------
+class ESTADOS_REVISION(Enum):
+    PENDIENTE = "Pendiente"
+    NO_REVISADA = "No revisada"
+    PENDIENTE_DE_REVISION = "Pendiente de revisión"
+    REVISADA = "Revisada"
+    REENTREGA = "Reentrega"
+
+
+PUNTUAL = "Puntual"
+PUNTUALIDAD_TARDIA = "Tardío"
+PUNTUALIDAD_AUSENTE = "Ausente"
+PUNTUALIDAD_LICENCIA = "Licencia"
+PUNTUALIDAD_SIN_REGISTRO = "Sin registrar"
+MOTIVO_ENTREGA_TARDIA = "entrega tardía"
+MOTIVO_LLEGADA_TARDIA = "llegada tardía"
+MOTIVO_INASISTENCIA = "inasistencia a clase"
+SEPARADOR_MOTIVOS = " y "
+FORMATO_NO_REVISADA = "No revisada: {motivos}"
+EXTENSION_PDF = ".pdf"
+TABLA_REVISIONES = "revisiones"
+MAX_OBSERVACIONES = 1000
+MSG_REENTREGA_SIN_PRESENCIA = "Reentrega no habilitada: no tienes asistencia registrada como presente en esa clase"
+MSG_REENTREGA_SIN_ERRORES = "Reentrega no habilitada: la tarea no fue revisada con errores"
+MSG_REENTREGA_REVISION_NO_HABILITADA = "La reentrega no está habilitada para esta tarea"  # antes chocaba con el nombre de HU2
+MSG_SOLO_PDF = "La reentrega debe ser un archivo PDF"
+MSG_REENTREGA_SIN_ARCHIVO = "Debes adjuntar un archivo PDF para la reentrega"
+MSG_NO_SE_PUEDE_REVISAR = "La tarea no se puede revisar: debe estar entregada a tiempo y con llegada puntual registrada"
+MSG_CON_ERRORES_INVALIDO = "El campo con_errores debe ser verdadero o falso"
+MSG_OBSERVACIONES_INVALIDAS = "Las observaciones deben ser texto de hasta 1000 caracteres"
+MSG_OBSERVACIONES_OBLIGATORIAS = "Debes escribir observaciones cuando la tarea tiene errores"
+MSG_REENTREGA_REGISTRADA = "Reentrega registrada: tu tarea quedó pendiente de revisión"
+MSG_REENTREGA_FUERA_DE_PLAZO = "Reentrega no habilitada: el plazo terminó en la siguiente clase, donde se revisa de nuevo"
