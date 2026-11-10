@@ -10,15 +10,6 @@
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
- main
-  <div class="pagina">
-    <header class="cabecera">
-      <div><h1>Asistencia</h1><p class="materia">Sistemas de Información 2</p></div>
-      <nav class="navegacion" aria-label="Secciones">
-        <a href="/">Inicio</a><a href="/asistencia.html" aria-current="page">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/revision_tareas.html">Revisión</a><a href="/registro_tarea.html">Registrar tarea</a><a href="/nota_final.html">Nota final</a>
-      </nav>
-    </header>
-
 <div class="pagina">
 <header class="cabecera">
     <div>
@@ -28,16 +19,13 @@
     <nav class="navegacion" aria-label="Secciones">
         <a href="/">Inicio</a>
         <a href="/asistencia.html" aria-current="page">Puntualidad</a>
-        
-        
     </nav>
 </header>
- feature/hu1-sancion-fruta-edwinCS
     <main>
       <div id="alerta" class="advertencia" role="alert" hidden>
         <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="alerta-texto"></p>
       </div>
-      
+
       <!-- SECCIÓN DE EVALUACIÓN DE INGRESO Y FRUTA (HU 1) -->
       <section class="tarjeta" aria-labelledby="titulo-marcar">
         <h2 id="titulo-marcar">Control de Ingreso y Sanción</h2>
@@ -70,14 +58,14 @@
   <script>
     function evaluarSancionFruta() {
         const inputFecha = document.getElementById('fecha-ingreso').value;
-        
+
         if (!inputFecha) {
             alert("Por favor selecciona una fecha y hora");
             return;
         }
 
-        // Enviamos la fecha directamente con segundos para que Flask la lea de forma exacta sin conversiones UTC
-        const fechaEnvio = inputFecha.length === 16 ? inputFecha + ":00" : inputFecha;
+        const fechaLimpia = inputFecha.replace(' ', 'T');
+        const fechaEnvio = fechaLimpia.length === 16 ? fechaLimpia + ":00" : fechaLimpia;
 
         fetch('/api/asistencia/evaluar-sancion', {
             method: 'POST',
@@ -86,30 +74,42 @@
             },
             body: JSON.stringify({ fecha: fechaEnvio })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error en el servidor Flask (Código " + response.status + ")");
+            }
+            return response.json();
+        })
         .then(data => {
             const contenedor = document.getElementById('resultado-sancion');
             const tbody = document.getElementById('historial');
-            document.getElementById('historial-vacio').style.display = 'none';
+            const vacio = document.getElementById('historial-vacio');
+            if (vacio) vacio.style.display = 'none';
 
             let textoEstado = "";
+            let colorEstilo = "";
+
             if (data.estado === "Debe fruta") {
-                textoEstado = `⚠️ <span style="color: #dc2626;">Debe fruta</span> (Ingreso: ${data.hora_ingreso}. Penalización: llevar una fruta la siguiente clase).`;
+                textoEstado = `⚠️ Debe fruta (Ingreso: ${data.hora_ingreso}. Penalización: llevar una fruta la próxima clase).`;
+                colorEstilo = "#dc2626";
             } else if (data.estado === "Puntual") {
-                textoEstado = `✅ <span style="color: #16a34a;">Puntual</span> (Ingreso: ${data.hora_ingreso}. ¡Sin sanción!).`;
+                textoEstado = `✅ Puntual (Ingreso: ${data.hora_ingreso}. ¡Sin sanción!).`;
+                colorEstilo = "#16a34a";
             } else {
-                textoEstado = `ℹ️ ${data.estado} (Fuera de horario de clases o día no válido).`;
+                textoEstado = `ℹ️ Fuera de horario o día no válido (${data.estado}).`;
+                colorEstilo = "#d97706";
             }
 
-            contenedor.innerHTML = textoEstado;
+            contenedor.innerHTML = `<span style="color: ${colorEstilo};">${textoEstado}</span>`;
 
-            // Agregar al historial
+            // Agregar al historial de la tabla de forma dinámica
             const fila = document.createElement('tr');
-            fila.innerHTML = `<td>${data.hora_ingreso}</td><td>${data.estado}</td>`;
+            fila.innerHTML = `<td>${data.fecha_completa || data.hora_ingreso}</td><td><span style="color: ${colorEstilo}; font-weight: bold;">${data.estado}</span></td>`;
             tbody.appendChild(fila);
         })
         .catch(error => {
-            console.error('Error al evaluar la sanción:', error);
+            console.error('Error:', error);
+            alert("Ocurrió un error al conectar con el servidor: " + error.message);
         });
     }
   </script>
