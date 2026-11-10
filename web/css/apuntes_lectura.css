@@ -1,0 +1,25 @@
+/* Apuntes, lectura y respuesta de clase (HU3): complementa base.css. */
+.lista-clases, .lista-notas, .lista-biblio { display:grid; gap:12px; margin:0; padding:0; list-style:none; }
+.clase-item { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 16px; padding:18px 20px; border:1px solid var(--linea); border-radius:16px; background:var(--superficie); }
+.clase-item h3 { margin:0 0 2px; font-family:var(--fuente-titulo); font-size:1.15rem; }
+.clase-item p { margin:0; color:var(--tinta-suave); font-size:.92rem; }
+.etiquetas { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.lectura-caja { display:grid; gap:2px; padding:14px 16px; border-left:5px solid var(--marca); border-radius:6px 14px 14px 6px; background:var(--marca-suave); }
+.lectura-caja strong { font-family:var(--fuente-titulo); font-size:1.1rem; }
+.lectura-caja a { color:var(--marca-oscura); font-weight:700; }
+.nota-item { padding:14px 16px; border:1px solid var(--linea); border-radius:12px; background:#fafbfe; }
+.nota-item p { margin:6px 0 0; white-space:pre-wrap; }
+.nota-meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 12px; color:var(--tinta-suave); font-size:.85rem; }
+.nota-acciones { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.confirmacion { margin:0 0 16px; padding:14px 16px; border-left:5px solid var(--ok); border-radius:6px 14px 14px 6px; background:var(--ok-suave); color:var(--ok); font-weight:700; }
+.calificacion { margin:0 0 16px; padding:14px 16px; border-radius:12px; background:var(--aviso-suave); color:var(--tinta); }
+.calificacion strong { font-family:var(--fuente-titulo); font-size:1.4rem; }
+.respuesta-lectura { margin:0 0 14px; padding:12px 14px; border-radius:10px; background:#f3f5fa; white-space:pre-wrap; }
+.obligatoria { color:var(--urgente); }
+.campo-falta input, .campo-falta textarea { border-color:var(--urgente); }
+textarea { min-height:90px; }
+.fila-acciones { display:flex; flex-wrap:wrap; gap:8px; }
+.boton.chico { padding:6px 12px; font-size:.9rem; }
+.casilla { display:flex; align-items:center; gap:8px; margin:8px 0 0; font-weight:600; }
+.casilla input { width:auto; }
+.pie-docente { margin-top:32px; color:var(--tinta-suave); font-size:.9rem; text-align:center; }

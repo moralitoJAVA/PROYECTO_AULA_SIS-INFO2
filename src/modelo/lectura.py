@@ -1,4 +1,4 @@
-from src.constantes import MSG_LECTURA_SIN_AUTOR, MSG_LECTURA_SIN_RECURSO, MSG_LECTURA_SIN_TITULO
+from src.constantes import MSG_LECTURA_SIN_RECURSO, MSG_LECTURA_SIN_TITULO
 
 
 def _limpiar(texto):
@@ -6,16 +6,16 @@ def _limpiar(texto):
 
 
 class Lectura:
-    def __init__(self, id_lectura, titulo, autor, archivo=None, enlace=None):
+    """Texto de la bibliografía que envía el docente: título y archivo o enlace (autor opcional)."""
+
+    def __init__(self, id_lectura, titulo, autor=None, archivo=None, enlace=None):
         if not _limpiar(titulo):
             raise ValueError(MSG_LECTURA_SIN_TITULO)
-        if not _limpiar(autor):
-            raise ValueError(MSG_LECTURA_SIN_AUTOR)
         if not _limpiar(archivo) and not _limpiar(enlace):
             raise ValueError(MSG_LECTURA_SIN_RECURSO)
         self.id = id_lectura
         self.titulo = _limpiar(titulo)
-        self.autor = _limpiar(autor)
+        self.autor = _limpiar(autor) or None
         self.archivo = _limpiar(archivo) or None
         self.enlace = _limpiar(enlace) or None
 
@@ -28,4 +28,4 @@ class Lectura:
 
     @classmethod
     def desdeDiccionario(cls, datos):
-        return cls(datos["id"], datos["titulo"], datos["autor"], datos["archivo"], datos["enlace"])
+        return cls(datos["id"], datos["titulo"], datos.get("autor"), datos.get("archivo"), datos.get("enlace"))

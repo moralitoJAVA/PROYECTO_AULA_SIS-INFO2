@@ -102,41 +102,49 @@ MSG_PESO_NEGATIVO = "Los pesos no pueden ser negativos"
 PESOS_POR_DEFECTO = {ASISTENCIA: Decimal("10"), TAREAS: Decimal("30"), EXAMENES: Decimal("40"), PROYECTO: Decimal("20")}
 
 # ---------------------------------------------------------------
-# HU4: Control de lectura
+# HU3: Apuntes, lectura y respuesta a pregunta de clase (vista del estudiante)
 # ---------------------------------------------------------------
-class ESTADOS_CONTROL(Enum):
+class ESTADOS_RESPUESTA(Enum):
     PENDIENTE = "Pendiente"
     RESPONDIDO = "Respondido"
 
 
 class PUNTUALIDAD(Enum):
-    A_TIEMPO = "Enviada a tiempo"
-    TARDE = "Enviada tarde"
+    A_TIEMPO = "A tiempo"
+    TARDE = "Tarde"
 
 
-ESTADO_REVISION_TARDE = "Tarde"
+class VENTANA_CLASE(Enum):
+    ANTES_DE_CLASE = "Antes de la clase"
+    DENTRO_DEL_PLAZO = "Dentro del plazo"
+    PLAZO_VENCIDO = "Plazo vencido"
+
+
 TABLA_LECTURAS = "lecturas"
-TABLA_CONTROLES = "controles_lectura"
-TABLA_RESPUESTAS_CONTROL = "respuestas_control"
+TABLA_CLASES_LECTURA = "clases_lectura"
+TABLA_APUNTES_LECTURA = "apuntes_lectura"
+TABLA_RESPUESTAS_CLASE = "respuestas_clase"
 TABLA_ESTUDIANTES_LECTURA = "estudiantes_lectura"
-PUNTAJE_CONTROL_POR_DEFECTO = Decimal("100")
-FORMATO_CONFIRMACION_CONTROL = "Respuestas enviadas el {fecha:%d/%m/%Y} a las {fecha:%H:%M:%S}"
-MSG_LECTURA_SIN_TITULO = "El título de la lectura no puede estar vacío"
-MSG_LECTURA_SIN_AUTOR = "El autor de la lectura no puede estar vacío"
-MSG_LECTURA_SIN_RECURSO = "La lectura debe tener un archivo o un enlace"
-MSG_LECTURA_NO_EXISTE = "La lectura no existe"
-MSG_CONTROL_SIN_TITULO = "El título del control de lectura no puede estar vacío"
-MSG_CONTROL_SIN_LECTURA = "El control debe estar asociado a una lectura"
-MSG_CONTROL_SIN_PREGUNTAS = "El control debe tener al menos una pregunta"
-MSG_PREGUNTA_VACIA = "El enunciado de la pregunta no puede estar vacío"
-MSG_CIERRE_INVALIDO = "El cierre debe ser posterior a la apertura"
-MSG_CONTROL_NO_EXISTE = "El control de lectura no existe"
-MSG_CONTROL_NO_HABILITADO = "El control de lectura no está habilitado para responder"
-MSG_PREGUNTA_OBLIGATORIA = "Falta responder la pregunta obligatoria {numero}"
-MSG_RESPUESTAS_INCOMPLETAS = "Debes enviar una respuesta por cada pregunta del control"
-MSG_CONTROL_YA_ENVIADO = "Ya enviaste este control; solo el docente puede habilitar otro intento"
-MSG_ERROR_GUARDADO = "No se pudieron guardar tus respuestas. El control no fue enviado; inténtalo de nuevo"
-MSG_SOLO_RESPONDIDOS = "Solo se puede calificar un control que ya fue respondido"
-MSG_NOTA_CONTROL_FUERA_DE_RANGO = "La nota debe estar entre 0 y el puntaje máximo del control"
-MSG_PUNTAJE_CONTROL_INVALIDO = "El puntaje máximo del control debe ser mayor que cero"
-MSG_FECHAS_INVALIDAS = "Debes indicar fecha y hora de apertura y de cierre válidas"
+CARPETA_PDF_POR_DEFECTO = "entregas_pdf"
+FORMATO_CONFIRMACION_RESPUESTA = "Respuesta enviada el {fecha:%d/%m/%Y} a las {fecha:%H:%M:%S}"
+FORMATO_FECHA_HORA_PDF = "{fecha:%d/%m/%Y} {fecha:%H:%M:%S}"
+MSG_LECTURA_SIN_TITULO = "El título del texto de la bibliografía no puede estar vacío"
+MSG_LECTURA_SIN_RECURSO = "El texto debe tener un archivo o un enlace"
+MSG_LECTURA_NO_EXISTE = "El texto de la bibliografía no existe"
+MSG_CLASE_SIN_TEMA = "El tema de la clase no puede estar vacío"
+MSG_CLASE_SIN_BIBLIOGRAFIA = "La clase debe tener al menos un texto de bibliografía"
+MSG_CLASE_CIERRE_INVALIDO = "El plazo de respuesta debe ser posterior al inicio de la clase"
+MSG_CLASE_NO_EXISTE = "La clase no existe"
+MSG_FECHAS_INVALIDAS = "Debes indicar fecha y hora válidas para la clase y para el plazo de respuesta"
+MSG_APUNTE_SIN_LECTURA = "Elige el texto de la bibliografía al que pertenece el apunte"
+MSG_LECTURA_FUERA_DE_CLASE = "Ese texto no pertenece a la bibliografía de la clase"
+MSG_DUDA_VACIA = "La duda no puede estar vacía"
+MSG_DUDA_NO_EXISTE = "La duda no existe"
+MSG_CAMPOS_OBLIGATORIOS = "Completa los campos obligatorios: {campos}"
+MSG_CLASE_NO_INICIADA = "La pregunta se plantea en clase: aún no puedes responder"
+MSG_RESPUESTA_YA_ENVIADA = "Ya enviaste tu respuesta; solo el docente puede habilitar otro intento"
+MSG_ERROR_GUARDADO = "No se pudo guardar tu respuesta. No fue enviada; inténtalo de nuevo"
+MSG_SOLO_RESPONDIDOS = "Solo se puede calificar una respuesta que ya fue enviada"
+MSG_NOTA_RESPUESTA_FUERA_DE_RANGO = "La nota debe estar entre 0 y el puntaje máximo"
+MSG_PDF_NO_EXISTE = "Todavía no hay un PDF de respuesta para este estudiante"
+PUNTAJE_RESPUESTA_POR_DEFECTO = Decimal("100")

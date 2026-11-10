@@ -8,3 +8,5 @@ venv/
 *.db
 .env
 .DS_Store
+# PDF de respuestas de clase generados por la aplicación
+entregas_pdf/
