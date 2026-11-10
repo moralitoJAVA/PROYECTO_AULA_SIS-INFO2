@@ -39,7 +39,8 @@
           <div><label for="clase-inicio">Inicio de la clase</label><input id="clase-inicio" type="datetime-local" required></div>
           <div><label for="clase-cierre">Plazo para responder ("A tiempo" hasta)</label><input id="clase-cierre" type="datetime-local" required></div>
         </div>
-        <label>Bibliografía de la clase</label>
+        <label class="casilla"><input id="clase-libre" type="checkbox"> Sin textos del docente: los estudiantes buscan su propia información</label>
+        <label>Bibliografía de la clase (opcional si marcaste la casilla anterior)</label>
         <div id="clase-lecturas"></div>
         <button class="boton primario grande" type="submit">Publicar clase</button>
       </form>

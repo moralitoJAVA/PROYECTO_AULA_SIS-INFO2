@@ -79,10 +79,11 @@ class ServicioApuntesLectura:
 
     def publicarClase(self, datos):
         ids = datos.get("ids_lecturas") or []
+        libre = bool(datos.get("investigacion_libre"))
         for id_lectura in ids:
             self._lectura(id_lectura)
         clase = ClaseLectura(self._siguienteId(self._repo_clases), datos.get("tema"),
-                             self._fecha(datos.get("inicio")), self._fecha(datos.get("cierre_respuesta")), ids)
+                             self._fecha(datos.get("inicio")), self._fecha(datos.get("cierre_respuesta")), ids, libre)
         clase.guardar(self._repo_clases)
         return clase.aDiccionario()
 
@@ -128,6 +129,7 @@ class ServicioApuntesLectura:
             "cierre_respuesta": clase.cierre_respuesta.isoformat(),
             "ventana": clase.ventana(ahora).value,
             "bibliografia": self._bibliografia(clase),
+            "investigacion_libre": clase.investigacion_libre,
             "puede_responder": bool(nombre) and respuesta.puedeResponder(clase, ahora),
             "estado": respuesta.estado.value,
             "puntualidad": respuesta.puntualidad.value if respuesta.puntualidad else None,
@@ -143,7 +145,10 @@ class ServicioApuntesLectura:
         if detalle:
             titulos = {lectura["id"]: lectura["titulo"] for lectura in vista["bibliografia"]}
             cuaderno = self._cuaderno(clase.id, nombre) if nombre else ApuntesControlLectura(clase.id, "")
-            vista["apuntes"] = [{**a, "titulo_lectura": titulos.get(a["id_lectura"], "")} for a in cuaderno.apuntes]
+            titulos_fuentes = {f["id"]: f["titulo"] for f in cuaderno.fuentes}
+            vista["apuntes"] = [{**a, "titulo_lectura": titulos.get(a["id_lectura"]) or titulos_fuentes.get(a.get("id_fuente"), "")}
+                                for a in cuaderno.apuntes]
+            vista["fuentes"] = cuaderno.fuentes
             vista["dudas"] = cuaderno.dudas
             vista["titulo_respuesta"] = respuesta.titulo
             vista["texto_respuesta"] = respuesta.respuesta
@@ -162,23 +167,39 @@ class ServicioApuntesLectura:
         return self._vistaClase(self._clase(id_clase), nombre, ahora, detalle=True)
 
     # ----- apuntes y dudas -----
-    def agregarApunte(self, id_clase, nombre, id_lectura, texto, ahora):
+    def agregarFuente(self, id_clase, nombre, titulo, enlace, ahora):
+        nombre = Estudiante(nombre).nombre
+        self._clase(id_clase)
+        cuaderno = self._cuaderno(id_clase, nombre)
+        fuente = cuaderno.agregarFuente(titulo, enlace, ahora)
+        self._guardarCuaderno(cuaderno)
+        return fuente
+
+    def editarFuente(self, id_clase, nombre, id_fuente, titulo, enlace):
+        nombre = Estudiante(nombre).nombre
+        self._clase(id_clase)
+        cuaderno = self._cuaderno(id_clase, nombre)
+        fuente = cuaderno.editarFuente(id_fuente, titulo, enlace)
+        self._guardarCuaderno(cuaderno)
+        return fuente
+
+    def agregarApunte(self, id_clase, nombre, id_lectura, texto, ahora, id_fuente=None):
         nombre = Estudiante(nombre).nombre
         clase = self._clase(id_clase)
         if id_lectura is not None and not clase.incluyeLectura(id_lectura):
             raise ValueError(MSG_LECTURA_FUERA_DE_CLASE)
         cuaderno = self._cuaderno(id_clase, nombre)
-        apunte = cuaderno.agregarApunte(id_lectura, texto, ahora)
+        apunte = cuaderno.agregarApunte(id_lectura, texto, ahora, id_fuente)
         self._guardarCuaderno(cuaderno)
         return apunte
 
-    def editarApunte(self, id_clase, nombre, id_apunte, texto, ahora, id_lectura=None):
+    def editarApunte(self, id_clase, nombre, id_apunte, texto, ahora, id_lectura=None, id_fuente=None):
         nombre = Estudiante(nombre).nombre
         clase = self._clase(id_clase)
         if id_lectura is not None and not clase.incluyeLectura(id_lectura):
             raise ValueError(MSG_LECTURA_FUERA_DE_CLASE)
         cuaderno = self._cuaderno(id_clase, nombre)
-        apunte = cuaderno.editarApunte(id_apunte, texto, ahora, id_lectura)
+        apunte = cuaderno.editarApunte(id_apunte, texto, ahora, id_lectura, id_fuente)
         self._guardarCuaderno(cuaderno)
         return apunte
 
