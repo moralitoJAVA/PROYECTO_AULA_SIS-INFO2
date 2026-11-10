@@ -18,6 +18,35 @@ def registrar(app, contexto):
     def cuerpo():
         return request.get_json(silent=True) or {}
 
+    # ---------- docente: bibliografía, clases y revisión (sin pantalla: las pruebas simulan al docente) ----------
+    @api.get("/api/lecturas")
+    def listar_lecturas():
+        return jsonify(servicio.listarLecturas())
+
+    @api.post("/api/lecturas")
+    def registrar_lectura():
+        return jsonify(servicio.registrarLectura(cuerpo())), CODIGO_CREADO
+
+    @api.post("/api/clases-lectura")
+    def publicar_clase():
+        return jsonify(servicio.publicarClase(cuerpo())), CODIGO_CREADO
+
+    @api.get("/api/clases-lectura/<int:id_clase>/respuestas")
+    def respuestas_de_la_clase(id_clase):
+        return jsonify(servicio.listarRespuestas(id_clase))
+
+    @api.post("/api/clases-lectura/<int:id_clase>/calificacion")
+    def calificar(id_clase):
+        datos = cuerpo()
+        servicio.calificar(id_clase, datos.get("estudiante"), datos.get("nota"),
+                           datos.get("retroalimentacion", ""), datos.get("publicar", False))
+        return jsonify({"mensaje": "Calificación guardada"})
+
+    @api.post("/api/clases-lectura/<int:id_clase>/nuevo-intento")
+    def nuevo_intento(id_clase):
+        servicio.habilitarNuevoIntento(id_clase, cuerpo().get("estudiante"))
+        return jsonify({"mensaje": "Nuevo intento habilitado"})
+
     # ---------- estudiante ----------
     @api.post("/api/clases-lectura/estudiantes")
     def identificar_estudiante():
