@@ -176,3 +176,39 @@ MSG_SIN_ADJUNTOS = "Debes adjuntar al menos un archivo antes de enviar la tarea"
 MSG_ERROR_ENVIO_CORREO = "No se pudo enviar el correo al docente. La tarea no quedó registrada como entregada"
 MSG_REENTREGA_NO_HABILITADA = "Ya enviaste esta tarea; solo el docente puede habilitar una reentrega"
 MSG_ENVIO_NO_EXISTE = "No existe un envío para esta tarea y estudiante"
+
+# ---------------------------------------------------------------
+# HU4: Revisión de tareas en clase
+# ---------------------------------------------------------------
+class ESTADOS_REVISION(Enum):
+    PENDIENTE = "Pendiente"
+    NO_REVISADA = "No revisada"
+    PENDIENTE_DE_REVISION = "Pendiente de revisión"
+    REVISADA = "Revisada"
+    REENTREGA = "Reentrega"
+
+
+PUNTUAL = "Puntual"
+PUNTUALIDAD_TARDIA = "Tardío"
+PUNTUALIDAD_AUSENTE = "Ausente"
+PUNTUALIDAD_LICENCIA = "Licencia"
+PUNTUALIDAD_SIN_REGISTRO = "Sin registrar"
+MOTIVO_ENTREGA_TARDIA = "entrega tardía"
+MOTIVO_LLEGADA_TARDIA = "llegada tardía"
+MOTIVO_INASISTENCIA = "inasistencia a clase"
+SEPARADOR_MOTIVOS = " y "
+FORMATO_NO_REVISADA = "No revisada: {motivos}"
+EXTENSION_PDF = ".pdf"
+TABLA_REVISIONES = "revisiones"
+MAX_OBSERVACIONES = 1000
+MSG_REENTREGA_SIN_PRESENCIA = "Reentrega no habilitada: no tienes asistencia registrada como presente en esa clase"
+MSG_REENTREGA_SIN_ERRORES = "Reentrega no habilitada: la tarea no fue revisada con errores"
+MSG_REENTREGA_REVISION_NO_HABILITADA = "La reentrega no está habilitada para esta tarea"  # antes chocaba con el nombre de HU2
+MSG_SOLO_PDF = "La reentrega debe ser un archivo PDF"
+MSG_REENTREGA_SIN_ARCHIVO = "Debes adjuntar un archivo PDF para la reentrega"
+MSG_NO_SE_PUEDE_REVISAR = "La tarea no se puede revisar: debe estar entregada a tiempo y con llegada puntual registrada"
+MSG_CON_ERRORES_INVALIDO = "El campo con_errores debe ser verdadero o falso"
+MSG_OBSERVACIONES_INVALIDAS = "Las observaciones deben ser texto de hasta 1000 caracteres"
+MSG_OBSERVACIONES_OBLIGATORIAS = "Debes escribir observaciones cuando la tarea tiene errores"
+MSG_REENTREGA_REGISTRADA = "Reentrega registrada: tu tarea quedó pendiente de revisión"
+MSG_REENTREGA_FUERA_DE_PLAZO = "Reentrega no habilitada: el plazo terminó en la siguiente clase, donde se revisa de nuevo"

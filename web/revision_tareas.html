@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revisión de tareas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/revision_tareas.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <div><h1>Revisión de tareas</h1><p class="materia">Sistemas de Información 2</p></div>
+      <nav class="navegacion" aria-label="Secciones">
+        <a href="/">Inicio</a><a href="/asistencia.html">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/revision_tareas.html" aria-current="page">Revisión</a><a href="/nota_final.html">Nota final</a>
+      </nav>
+    </header>
+    <main>
+      <p class="ayuda">Una tarea se revisa en clase solo si la entregaste antes de las 06:45 y llegaste puntual (hasta las 07:00). La reentrega solo está disponible si estás presente en esa clase.</p>
+      <ul id="lista" class="revisiones"></ul>
+      <div id="vacio" class="vacio" hidden>Todavía no hay tareas registradas.</div>
+    </main>
+  </div>
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+  <script src="/js/comun.js"></script>
+  <script src="/js/revision_tareas.js"></script>
+</body>
+</html>
