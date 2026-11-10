@@ -144,6 +144,8 @@ MSG_FUENTE_SIN_TITULO = "El título de la fuente no puede estar vacío"
 MSG_FUENTE_NO_EXISTE = "La fuente no existe"
 MSG_APUNTE_DOS_ORIGENES = "El apunte pertenece a un texto de la bibliografía o a una fuente propia, no a ambos"
 MSG_CAMPOS_OBLIGATORIOS = "Completa los campos obligatorios: {campos}"
+MAX_TITULO_RESPUESTA = 200
+MSG_TITULO_RESPUESTA_LARGO = "El título no puede superar los {maximo} caracteres"
 MSG_CLASE_NO_INICIADA = "La pregunta se plantea en clase: aún no puedes responder"
 MSG_RESPUESTA_YA_ENVIADA = "Ya enviaste tu respuesta; solo el docente puede habilitar otro intento"
 MSG_ERROR_GUARDADO = "No se pudo guardar tu respuesta. No fue enviada; inténtalo de nuevo"
@@ -164,6 +166,7 @@ class ESTADOS_ENVIO(Enum):
 class PUNTUALIDAD_ENTREGA(Enum):
     A_TIEMPO = "Entregada a tiempo"
     TARDE = "Entregada tarde"
+
 
 
 TABLA_MATERIAS = "materias"
@@ -212,3 +215,20 @@ MSG_OBSERVACIONES_INVALIDAS = "Las observaciones deben ser texto de hasta 1000 c
 MSG_OBSERVACIONES_OBLIGATORIAS = "Debes escribir observaciones cuando la tarea tiene errores"
 MSG_REENTREGA_REGISTRADA = "Reentrega registrada: tu tarea quedó pendiente de revisión"
 MSG_REENTREGA_FUERA_DE_PLAZO = "Reentrega no habilitada: el plazo terminó en la siguiente clase, donde se revisa de nuevo"
+
+# ---------------------------------------------------------------
+# HU1: Sanción por llegada tardía (fruta)
+# ---------------------------------------------------------------
+HORA_INICIO_CLASE = time(6, 45)
+HORA_FIN_CLASE = time(8, 14)
+HORA_LIMITE_SIN_SANCION = time(7, 0)
+SANCION_PUNTUAL = "Puntual"
+SANCION_DEBE_FRUTA = "Debe fruta"
+SANCION_DIA_SIN_CLASES = "Día sin clases"
+SANCION_FUERA_DE_HORARIO = "Fuera de horario"
+TABLA_INGRESOS = "ingresos"
+MSG_FUERA_DE_HORARIO = "El ingreso está fuera del horario de clase (06:45 a 08:14)"
+MSG_INGRESO_YA_REGISTRADO = "Ya registraste tu ingreso en esa clase"
+MSG_FECHA_INGRESO_INVALIDA = "La fecha y hora de ingreso no son válidas"
+FORMATO_MENSAJE_PUNTUAL = "Ingresaste a las {hora}: puntual, sin sanción"
+FORMATO_MENSAJE_FRUTA = "Ingresaste a las {hora}: debes fruta para la próxima clase ({proxima:%d/%m/%Y})"

@@ -14,13 +14,26 @@
     <header class="cabecera">
       <div><h1>Asistencia</h1><p class="materia">Sistemas de Información 2</p></div>
       <nav class="navegacion" aria-label="Secciones">
-        <a href="/">Inicio</a><a href="/asistencia.html" aria-current="page">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/revision_tareas.html">Revisión</a><a href="/registro_tarea.html">Registrar tarea</a><a href="/nota_final.html">Nota final</a>
+        <a href="/">Inicio</a><a href="/asistencia.html" aria-current="page">Asistencia</a><a href="/tareas.html">Tareas</a><a href="/revision_tareas.html">Revisión</a>
       </nav>
     </header>
     <main>
       <div id="alerta" class="advertencia" role="alert" hidden>
         <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="alerta-texto"></p>
       </div>
+      <section class="tarjeta" aria-labelledby="titulo-ingreso">
+        <h2 id="titulo-ingreso">Mi ingreso al salón</h2>
+        <p class="ayuda">Clases: martes, miércoles y viernes de 06:45 a 08:14. Ingresar hasta las 07:00 es puntual; después de las 07:00 debes fruta para la próxima clase.</p>
+        <div id="fruta-aviso" class="advertencia" role="status" hidden>
+          <svg class="icono" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8v4M10 14.5v.5"/></svg><p id="fruta-aviso-texto"></p>
+        </div>
+        <div class="campos">
+          <div class="campo-completo"><label for="ingreso-fecha">Fecha y hora de ingreso (opcional)</label><input id="ingreso-fecha" type="datetime-local" step="1"><p class="ayuda">Déjala vacía para registrar la hora actual.</p></div>
+        </div>
+        <button id="ingreso-registrar" class="boton primario grande">Registrar mi ingreso</button>
+        <p id="ingreso-resultado" class="ayuda" role="status"></p>
+        <div class="tabla-caja"><table class="tabla"><thead><tr><th>Fecha</th><th>Hora de ingreso</th><th>Estado</th></tr></thead><tbody id="ingreso-historial"></tbody></table><div id="ingreso-vacio" class="vacio" hidden>Todavía no registraste ningún ingreso.</div></div>
+      </section>
       <section class="tarjeta" aria-labelledby="titulo-porcentaje">
         <h2 id="titulo-porcentaje">Porcentaje acumulado</h2>
         <div class="metrica" id="metrica"><span class="metrica-cifra" id="porcentaje">pendiente</span><span class="metrica-nota" id="resumen"></span></div>
@@ -43,6 +56,7 @@
   </div>
   <div id="mensaje" class="mensaje" role="status" hidden></div>
   <script src="/js/comun.js"></script>
+  <script src="/js/ingreso_fruta.js"></script>
   <script type="module" src="/js/panel_asistencia.js"></script>
 </body>
 </html>
