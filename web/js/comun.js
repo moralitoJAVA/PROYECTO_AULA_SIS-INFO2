@@ -20,5 +20,5 @@ function mostrarMensaje(id, texto, tipo = "") {
 function escapar(texto) {
   const nodo = document.createElement("span");
   nodo.textContent = texto;
-  return nodo.innerHTML;
+  return nodo.innerHTML.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }

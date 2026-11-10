@@ -15,9 +15,9 @@ PREFIJO_MODULOS_API = "api_"
 CODIGO_ERROR_DE_DATOS = 400
 
 
-def crear_app(ruta_bd=RUTA_BD, ahora=datetime.now):
+def crear_app(ruta_bd=RUTA_BD, ahora=datetime.now, carpeta_pdf=None):
     app = Flask(__name__, static_folder=str(CARPETA_WEB), static_url_path="")
-    contexto = Contexto(ruta_bd, ahora)
+    contexto = Contexto(ruta_bd, ahora, carpeta_pdf)
 
     @app.errorhandler(ValueError)
     def mostrar_error_de_datos(error):
