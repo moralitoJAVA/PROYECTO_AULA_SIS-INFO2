@@ -1,0 +1,47 @@
+/* Control de lectura: complementa base.css y apuntes_lectura.css. */
+.selector-clase label { margin-top:0; }
+.selector-clase select { max-width:520px; }
+.resumen-clase { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:12px; color:var(--tinta-suave); font-size:.92rem; }
+
+.pasos { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:0 0 16px; padding:0; list-style:none; }
+.paso { display:flex; align-items:center; gap:12px; width:100%; padding:12px 14px; border:1.5px solid var(--linea); border-radius:14px; background:var(--superficie); color:var(--tinta); font:inherit; text-align:left; cursor:pointer; }
+.paso:hover { border-color:var(--marca); }
+.paso[aria-selected="true"] { border-color:var(--marca); background:var(--marca-suave); }
+.paso-num { flex:none; display:grid; place-items:center; width:32px; height:32px; border-radius:50%; background:#eef0f6; color:var(--tinta-suave); font-family:var(--fuente-titulo); font-weight:800; }
+.paso[aria-selected="true"] .paso-num { background:var(--marca); color:#fff; }
+.paso.completo .paso-num { background:var(--ok); color:#fff; }
+.paso-texto { display:grid; line-height:1.25; min-width:0; }
+.paso-texto small { color:var(--tinta-suave); font-size:.85rem; }
+
+.lista-lecturas { display:grid; gap:14px; margin:0; padding:0; list-style:none; }
+.lectura-tarjeta { padding:16px; border:1px solid var(--linea); border-radius:14px; background:#fafbfe; }
+.lectura-tarjeta.leida { border-color:#9fd6bf; background:#f3fbf7; }
+.lectura-cabecera { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:8px 16px; }
+.lectura-cabecera h3 { margin:0; font-family:var(--fuente-titulo); font-size:1.1rem; }
+.lectura-cabecera p { margin:2px 0 0; color:var(--tinta-suave); font-size:.92rem; }
+.lectura-cabecera a { color:var(--marca-oscura); font-weight:700; }
+.lectura-tarjeta .casilla { margin:0; padding:6px 12px; border:1.5px solid var(--linea); border-radius:999px; background:var(--superficie); cursor:pointer; }
+.lectura-tarjeta.leida .casilla { border-color:var(--ok); color:var(--ok); }
+.lectura-apuntes { display:grid; gap:8px; margin:12px 0 0; padding:0; list-style:none; }
+.lectura-apuntes .nota-item { padding:10px 12px; background:var(--superficie); }
+.lectura-apuntes .nota-item p { margin:0; }
+.form-apunte-rapido { display:flex; flex-wrap:wrap; gap:8px; align-items:flex-end; margin-top:12px; }
+.form-apunte-rapido textarea { flex:1 1 260px; min-height:60px; }
+
+.subtitulo { display:flex; align-items:center; gap:8px; margin:22px 0 10px; font-family:var(--fuente-titulo); font-size:1.05rem; }
+.duda-item { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:12px 16px; border:1px solid var(--linea); border-radius:12px; background:#fafbfe; }
+.duda-item p { flex:1 1 280px; margin:0; white-space:pre-wrap; }
+.duda-item.resuelta p { color:var(--tinta-suave); text-decoration:line-through; text-decoration-color:#aab4c8; }
+.duda-item .casilla { margin:0; }
+
+@media (max-width:640px) {
+  .pasos { grid-template-columns:1fr; }
+}
+
+.form-fuente { display:grid; grid-template-columns:1fr 1fr auto; gap:0 12px; align-items:end; margin-bottom:16px; }
+.form-fuente .boton { margin-bottom:0; }
+.form-fuente-editar { display:grid; gap:8px; width:100%; }
+@media (max-width:640px) {
+  .form-fuente { grid-template-columns:1fr; }
+  .form-fuente .boton { margin-top:12px; }
+}

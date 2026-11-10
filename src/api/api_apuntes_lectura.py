@@ -18,7 +18,7 @@ def registrar(app, contexto):
     def cuerpo():
         return request.get_json(silent=True) or {}
 
-    # ---------- docente: bibliografía, clases y revisión ----------
+    # ---------- docente: bibliografía, clases y revisión (sin pantalla: las pruebas simulan al docente) ----------
     @api.get("/api/lecturas")
     def listar_lecturas():
         return jsonify(servicio.listarLecturas())
@@ -64,14 +64,26 @@ def registrar(app, contexto):
     def crear_apunte(id_clase):
         datos = cuerpo()
         apunte = servicio.agregarApunte(id_clase, datos.get("estudiante"), datos.get("id_lectura"),
-                                        datos.get("texto"), contexto.ahora())
+                                        datos.get("texto"), contexto.ahora(), datos.get("id_fuente"))
         return jsonify(apunte), CODIGO_CREADO
 
     @api.put("/api/clases-lectura/<int:id_clase>/apuntes/<int:id_apunte>")
     def editar_apunte(id_clase, id_apunte):
         datos = cuerpo()
         return jsonify(servicio.editarApunte(id_clase, datos.get("estudiante"), id_apunte, datos.get("texto"),
-                                             contexto.ahora(), datos.get("id_lectura")))
+                                             contexto.ahora(), datos.get("id_lectura"), datos.get("id_fuente")))
+
+    @api.post("/api/clases-lectura/<int:id_clase>/fuentes")
+    def crear_fuente(id_clase):
+        datos = cuerpo()
+        return jsonify(servicio.agregarFuente(id_clase, datos.get("estudiante"), datos.get("titulo"),
+                                              datos.get("enlace"), contexto.ahora())), CODIGO_CREADO
+
+    @api.put("/api/clases-lectura/<int:id_clase>/fuentes/<int:id_fuente>")
+    def editar_fuente(id_clase, id_fuente):
+        datos = cuerpo()
+        return jsonify(servicio.editarFuente(id_clase, datos.get("estudiante"), id_fuente, datos.get("titulo"),
+                                             datos.get("enlace")))
 
     @api.post("/api/clases-lectura/<int:id_clase>/dudas")
     def crear_duda(id_clase):
